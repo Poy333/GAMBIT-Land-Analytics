@@ -1,0 +1,29 @@
+<!-- templates/land_mapping.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Land Mapping for Mountain Agriculture</h1>
+    <div class="container">
+        <p>Welcome to the Land Mapping section. Below are images of various land areas across different barangays, showcasing suitable and unsuitable land for farming.</p>
+        
+        <!-- Displaying the images -->
+        <div class="row">
+            <!-- Suitable Land -->
+            <div class="col-md-6 mb-4">
+                <h3 class="text-center">Suitable Land</h3>
+                <img src="{{ url_for('static', filename='images/suitable_land_example.jpg') }}" alt="Suitable Land Example" class="img-fluid">
+                <p class="text-center">Example of suitable land for farming.</p>
+            </div>
+
+            <!-- Not Suitable Land -->
+            <div class="col-md-6 mb-4">
+                <h3 class="text-center">Not Suitable Land</h3>
+                <img src="{{ url_for('static', filename='images/not_suitable_land_example.jpg') }}" alt="Not Suitable Land Example" class="img-fluid">
+                <p class="text-center">Example of land not suitable for farming.</p>
+            </div>
+        </div>
+
+        <p> Explore different areas and assess the land's suitability for farming in the mountain barangays.
+            Below are the mountain barangays in Cebu City that we surveyed. In each area, we evaluated and classified the land as either suitable or not suitable for farming based on various factors such as soil quality, slope, water availability, and accessibility.</p>
+    </div>
+{% endblock %}

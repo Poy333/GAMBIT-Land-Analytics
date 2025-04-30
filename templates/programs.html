@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .slideshow-container {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        overflow: hidden;
+    }
+
+    .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: none;
+        object-fit: cover;
+        animation-name: fade;
+        animation-duration: 1s;
+    }
+
+    @keyframes fade {
+        from { opacity: 0.4; }
+        to { opacity: 1; }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+        text-align: center;
+        padding-top: 20vh;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 100, 0, 0.6); /* Dark green overlay */
+        z-index: 1;
+    }
+</style>
+
+<!-- Hero Section with Slideshow -->
+<div class="slideshow-container">
+    <!-- Slides -->
+    <img class="slide" src="{{ url_for('static', filename='images/image1.jpg') }}">
+    <img class="slide" src="{{ url_for('static', filename='images/image2.jpg') }}">
+    <img class="slide" src="{{ url_for('static', filename='images/image3.jpg') }}">
+    <img class="slide" src="{{ url_for('static', filename='images/image4.jpg') }}">
+
+    <!-- Overlay for text readability -->
+    <div class="hero-overlay"></div>
+
+    <!-- Text content -->
+    <div class="hero-content">
+        <h1 class="fade-in">WHAT WE DO?</h1>
+        <p class="fade-in">We assist farmers in identifying and allocating suitable land for agriculture, conducting thorough surveys, and providing a range of support services to enhance productivity and sustainability.</p>
+    </div>
+</div>
+
+<!-- Program Descriptions -->
+<section class="fade-in mt-4" style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
+    <h2 style="color: #006400;">Land Identification Workshops</h2>
+    <p>We conduct practical workshops where farmers and local communities are trained to identify potential land suitable for farming. These workshops emphasize using geographic tools and soil analysis to assess land quality and suitability for various crops.</p>
+</section>
+
+<section class="fade-in mt-3" style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
+    <h2 style="color: #006400;">Soil Quality Surveys</h2>
+    <p>Our team works closely with local farmers to survey land and analyze soil conditions. This data is used to help identify areas that are ideal for farming and those that require interventions to improve soil health.</p>
+</section>
+
+<section class="fade-in mt-3" style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
+    <h2 style="color: #006400;">Mapping & Data Analysis for Agricultural Land Use</h2>
+    <p>We gather geographic data, including topography and climate, to help farmers understand which areas are the best for farming. Using this information, we create detailed maps and analysis that guide land use planning and crop decisions.</p>
+</section>
+
+<section class="fade-in mt-3 mb-5" style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
+    <h2 style="color: #006400;">Community Collaboration</h2>
+    <p>Our research is not only about finding land for farming but also about creating a community-driven approach to sustainable land use. By working together with local communities, we ensure that our findings are aligned with their needs and environmental conditions.</p>
+</section>
+
+<!-- Slideshow Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("slide");
+
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3000); // Change every 3 seconds
+        }
+
+        showSlides();
+    });
+</script>
+
+{% endblock %}
