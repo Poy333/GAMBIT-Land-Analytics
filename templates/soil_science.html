@@ -2,69 +2,194 @@
 
 {% block content %}
 <div class="container fade-in">
-    <h1 class="mb-4">TYPES OF LAND SUITABLE AND NOT SUITABLE FOR FARMING</h1>
-    <p>
-        Understanding the types of land that can support agriculture is essential for effective land use planning. Farming success depends heavily on soil quality, topography, climate, and water availability. Generally, land can be classified into two broad categories: suitable for farming and not suitable for farming.
-    </p>
+    <!-- Understanding Soil for Improved Irrigation Box -->
+    <div class="soil-insights-box">
+        <h2>Understanding Soil for Improved Irrigation: Insights from GAMBIT Mapping</h2>
+    </div>
 
+    <!-- Two Side-by-Side Boxes -->
     <div class="row mt-4">
+        <!-- Suitable Land -->
         <div class="col-md-6">
-            <h3>Suitable for Farming</h3>
-            <button class="btn btn-success m-2" data-toggle="modal" data-target="#arableModal">Arable Land</button>
-            <button class="btn btn-success m-2" data-toggle="modal" data-target="#drainedModal">Well-Drained Land</button>
-            <button class="btn btn-success m-2" data-toggle="modal" data-target="#fertileModal">Fertile Land</button>
-            <button class="btn btn-success m-2" data-toggle="modal" data-target="#flatModal">Flat or Gently Sloped Land</button>
-            <button class="btn btn-success m-2" data-toggle="modal" data-target="#loamyModal">Loamy Soil Land</button>
+            <div class="land-box suitable">
+                <h3>SUITABLE LAND</h3>
+                <div class="suitable-buttons mt-3">
+                    <button class="btn m-2" data-toggle="modal" data-target="#arableModal">Arable Land</button>
+                    <button class="btn m-2" data-toggle="modal" data-target="#drainedModal">Well-Drained Land</button>
+                    <button class="btn m-2" data-toggle="modal" data-target="#fertileModal">Fertile Land</button>
+                    <button class="btn m-2" data-toggle="modal" data-target="#flatModal">Flat Land</button>
+                    <button class="btn m-2" data-toggle="modal" data-target="#loamyModal">Loamy Soil</button>
+                </div>
+            </div>
         </div>
+
+        <!-- Not Suitable Land -->
         <div class="col-md-6">
-            <h3>Not Suitable for Farming</h3>
-            <button class="btn btn-danger m-2" data-toggle="modal" data-target="#barrenModal">Barren Land</button>
-            <button class="btn btn-danger m-2" data-toggle="modal" data-target="#erodedModal">Eroded Land</button>
-            <button class="btn btn-danger m-2" data-toggle="modal" data-target="#rockyModal">Rocky or Stony Land</button>
-            <button class="btn btn-danger m-2" data-toggle="modal" data-target="#salineModal">Saline or Alkaline Land</button>
-            <button class="btn btn-danger m-2" data-toggle="modal" data-target="#steepModal">Steep or Mountainous Terrain</button>
-            <button class="btn btn-danger m-2" data-toggle="modal" data-target="#waterloggedModal">Waterlogged or Poorly Drained Land</button>
+            <div class="land-box not-suitable">
+                <h3>NOT-SUITABLE LAND</h3>
+                <div class="not-suitable-buttons mt-3">
+                    <button class="btn btn-danger m-2" data-toggle="modal" data-target="#rockyModal">Rocky Land</button>
+                    <button class="btn btn-danger m-2" data-toggle="modal" data-target="#waterloggedModal">Waterlogged Land</button>
+                    <button class="btn btn-danger m-2" data-toggle="modal" data-target="#steepModal">Steep Land</button>
+                    <button class="btn btn-danger m-2" data-toggle="modal" data-target="#sandyModal">Sandy Soil</button>
+                    <button class="btn btn-danger m-2" data-toggle="modal" data-target="#acidicModal">Acidic Soil</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <p class="mt-4">
-        Knowing what kind of land you have is very important for farming. Using land that is good for growing crops—and fixing or avoiding land that isn’t—can help make farming more successful and long-lasting.
-    </p>
-
-    <p style="font-style: italic; text-align: center; color: #2c3e50;">
-        We, The GAMBIT, are here to help you identify land in the mountain barangays of Cebu City that is suitable for farming, and also show you which areas are not good for planting.
-    </p>
-</div>
-
-<!-- Modals Section (sorted alphabetically by title) -->
-{% for item in [
-    {'id': 'arable', 'title': 'Arable Land', 'image': 'arable_land.jpg', 'desc': 'Fertile and capable of being plowed and used to grow crops. It has balanced soil composition, adequate drainage, and favorable topography.'},
-    {'id': 'barren', 'title': 'Barren Land', 'image': 'barren_land.jpg', 'desc': 'Lacks vegetation and organic matter. Often dry, hard, and unable to support plant life without restoration.'},
-    {'id': 'drained', 'title': 'Well-Drained Land', 'image': 'well_drained_land.jpg', 'desc': 'Does not retain excess water, supporting root health and reducing the risk of crop diseases.'},
-    {'id': 'eroded', 'title': 'Eroded Land', 'image': 'eroded_land.jpg', 'desc': 'Topsoil has been removed, reducing fertility and agricultural productivity.'},
-    {'id': 'fertile', 'title': 'Fertile Land', 'image': 'fertile_land.jpg', 'desc': 'Contains high levels of essential nutrients like nitrogen, phosphorus, and potassium. Supports a wide range of crops and promotes strong plant growth.'},
-    {'id': 'flat', 'title': 'Flat or Gently Sloped Land', 'image': 'flat_land.jpg', 'desc': 'Easier to cultivate and irrigate, and minimizes the risk of erosion and water runoff.'},
-    {'id': 'loamy', 'title': 'Loamy Soil Land', 'image': 'loamy_soil_land.jpg', 'desc': 'Considered the best soil type for farming, with an ideal mixture of sand, silt, and clay. Allows for good water retention, drainage, and nutrient availability.'},
-    {'id': 'rocky', 'title': 'Rocky or Stony Land', 'image': 'rocky_land.jpg', 'desc': 'Difficult to cultivate due to machinery limitations and poor root penetration.'},
-    {'id': 'saline', 'title': 'Saline or Alkaline Land', 'image': 'saline_land.jpg', 'desc': 'High salt or pH levels harm plant roots and block nutrient absorption, requiring expensive treatment.'},
-    {'id': 'steep', 'title': 'Steep or Mountainous Terrain', 'image': 'steep_land.jpg', 'desc': 'Prone to erosion and difficult to plow or irrigate. Terracing is possible but labor-intensive.'},
-    {'id': 'waterlogged', 'title': 'Water_logged or Poorly Drained Land', 'image': 'water_logged_land.jpg', 'desc': 'Excess water drowns roots and leads to crop failure and soil compaction.'}
-]|sort(attribute='title') %}
-<div class="modal fade" id="{{ item.id }}Modal" tabindex="-1" role="dialog" aria-labelledby="{{ item.id }}ModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{ item.title }}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <img src="{{ url_for('static', filename='images/' ~ item.image) }}" class="img-fluid mb-3" alt="{{ item.title }}">
-        <p>{{ item.desc }}</p>
-      </div>
+    <!-- Explanation Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="explanation-box">
+                <h3>Why Understanding Suitable and Not-Suitable Land is Important</h3>
+                <p>Understanding the characteristics of suitable and not-suitable land is crucial for successful farming practices. Suitable land is the foundation for healthy crops, ensuring that plants have access to the necessary nutrients, proper drainage, and optimal growing conditions. On the other hand, not-suitable land may lead to poor crop yields, environmental damage, or wasted resources. By understanding both types of land, farmers can make informed decisions about where to plant, how to improve soil conditions, and how to optimize irrigation and fertilization methods for sustainable agriculture.</p>
+            </div>
+        </div>
     </div>
-  </div>
+
 </div>
-{% endfor %}
+
+<!-- Modals with more detailed explanations for Not-Suitable Land -->
+<div class="modal fade" id="rockyModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Rocky Land</h5>
+      <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+    </div>
+    <div class="modal-body">
+      Rocky land is unsuitable for farming due to the presence of large rocks that hinder plowing and plant growth. These rocks make it difficult to work the land and impede root development. Additionally, rocky land often has poor soil depth and is prone to erosion.
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="waterloggedModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Waterlogged Land</h5>
+      <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+    </div>
+    <div class="modal-body">
+      Waterlogged land has poor drainage and retains excessive water, making it difficult for plants to grow. The excessive moisture leads to root rot, nutrient deficiencies, and an increased risk of fungal diseases. This type of land is unsuitable for most agricultural crops.
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="steepModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Steep Land</h5>
+      <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+    </div>
+    <div class="modal-body">
+      Steep land is prone to erosion and runoff, making it difficult to manage for farming. Crops on steep slopes are often exposed to excessive water runoff, which washes away topsoil and reduces soil fertility. Such land is challenging for cultivation and requires special techniques to prevent erosion.
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="sandyModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Sandy Soil</h5>
+      <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+    </div>
+    <div class="modal-body">
+      Sandy soil has large particles that allow water to drain too quickly, making it difficult for plants to absorb enough water and nutrients. This type of soil often lacks the necessary organic matter and nutrients for healthy plant growth. It also requires frequent irrigation and fertilization.
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="acidicModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Acidic Soil</h5>
+      <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+    </div>
+    <div class="modal-body">
+      Acidic soil has a low pH, which can affect the availability of essential nutrients for plants. Crops generally prefer neutral to slightly acidic soils, so highly acidic soil can lead to nutrient deficiencies, stunted growth, and poor crop yields.
+    </div>
+  </div></div>
+</div>
+
+<!-- Inline CSS -->
+<style>
+.soil-insights-box {
+    border: 3px solid transparent;
+    padding: 20px;
+    margin: 30px 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.soil-insights-box h2 {
+    color: black;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.land-box {
+    border: 3px solid transparent;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    height: 100%;
+}
+
+.land-box h3 {
+    color: black;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.suitable-buttons .btn,
+.not-suitable-buttons .btn {
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
+    color: white;
+    border: none;
+}
+
+.suitable-buttons .btn:hover,
+.not-suitable-buttons .btn:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* darker on hover */
+}
+
+.not-suitable-buttons .btn {
+    background-color: rgba(255, 0, 0, 0.6); /* semi-transparent red for not-suitable land */
+}
+
+.not-suitable-buttons .btn:hover {
+    background-color: rgba(255, 0, 0, 0.8); /* darker on hover */
+}
+
+.explanation-box {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 30px;
+}
+
+.explanation-box h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: black;
+}
+
+.explanation-box p {
+    font-size: 1.1rem;
+    color: white; /* Change the font color to white */
+    margin-top: 15px;
+}
+</style>
+
 {% endblock %}

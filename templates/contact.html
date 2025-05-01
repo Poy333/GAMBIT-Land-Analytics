@@ -1,30 +1,185 @@
-<!-- templates/contact.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <h1>Contact Us</h1>
-    <p>Want to join our mission or have questions? Reach out to us!</p>
-    
-    <!-- Your contact information -->
-    <div>
-        <h3>TEAM GAMBIT</h3>
-        <p><strong>Contact #:</strong> 09212301647</p>
-        <p><strong>Email:</strong> <a href="mailto:felquezmagalona27@gmail.com">felquezmagalona27@gmail.com</a></p>
-        <p><strong>Message:</strong> Contact us for more information</p>
+<!-- Contact Us Section -->
+<div class="contact-section">
+    <!-- Left Section with Logo Circle -->
+    <div class="left-section">
+        <div class="logo-circle">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="GAMBIT Logo">
+        </div>
     </div>
-    
-    <!-- Optional Contact Form (if you still want to keep it) -->
-    <!--
-    <form action="#" method="post">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" placeholder="Your name"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" placeholder="Your email"><br>
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message" rows="4" placeholder="Your message"></textarea><br>
-        <button type="submit" class="btn">Send Message</button>
-    </form>
-    -->
+
+    <!-- Right Section with Contact Box -->
+    <div class="right-section">
+        <div class="box">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or would like more information, feel free to contact us:</p>
+            <ul>
+                <!-- Phone -->
+                <li><i class="fas fa-phone-alt move-icon"></i> Phone: <a href="tel:+639212301647">09212301647</a></li>
+                <!-- Facebook -->
+                <li><i class="fab fa-facebook-square move-icon"></i> Facebook: <a href="https://facebook.com/JohnGodfreyL.Mabini" target="_blank">John Godfrey L. Mabini</a></li>
+                <!-- Email -->
+                <li><i class="fas fa-envelope move-icon"></i> Email: <a href="mailto:japoylabrador312@gmail.com">japoylabrador312@gmail.com</a></li>
+            </ul>
+
+            <!-- THANK YOU with small circle logo -->
+            <div class="thank-you-wrapper">
+                <span class="thank-text">THANK</span>
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="GAMBIT Logo" class="logo-bottom-circle">
+                <span class="you-text">YOU!</span>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- CSS -->
+<style>
+    .contact-section {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 50px;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .left-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+    .logo-circle {
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -20px;
+    }
+
+    .logo-circle img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .right-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        text-align: center;
+    }
+
+    .box h2 {
+        font-size: 2rem;
+        color: #333;
+    }
+
+    .box p {
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .box ul {
+        list-style-type: none;
+        padding: 0;
+        font-size: 1.1rem;
+    }
+
+    .box li {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .box a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .box a:hover {
+        text-decoration: underline;
+    }
+
+    .box i {
+        font-size: 1.5rem;
+        margin-right: 10px;
+        color: #007bff;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .move-icon:hover {
+        transform: translateY(-10px) scale(1.2);
+    }
+
+    /* THANK YOU Layout */
+    .thank-you-wrapper {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .thank-text,
+    .you-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .logo-bottom-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #007bff;
+    }
+
+    @media (max-width: 768px) {
+        .contact-section {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .left-section, .right-section {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .logo-circle {
+            width: 400px;
+            height: 400px;
+        }
+
+        .box {
+            width: 90%;
+        }
+
+        .thank-text, .you-text {
+            font-size: 1.2rem;
+        }
+
+        .logo-bottom-circle {
+            width: 60px;
+            height: 60px;
+        }
+    }
+</style>
+
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 {% endblock %}

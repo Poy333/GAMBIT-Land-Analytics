@@ -1,79 +1,113 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-image: url('{{ url_for("static", filename="images/background.jpg") }}');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    .hero-bg {
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .overlay-text {
+        text-align: center;
+    }
+
+    .overlay-text h1,
+    .overlay-text p {
+        color: white;
+        text-shadow:
+            -1px -1px 0 #000,
+             1px -1px 0 #000,
+            -1px  1px 0 #000,
+             1px  1px 0 #000;
+    }
+
+    /* Box for Goals */
+    .goal-box {
+        display: inline-block;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #f5f5f5;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    .goal-box h5 {
+        font-size: 1.25rem;
+        margin-top: 1rem;
+        color: #f5f5f5;
+    }
+
+    .goal-box p {
+        font-size: 1rem;
+        color: #e0e0e0;
+    }
+
+    .goal-header {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+</style>
+
 <!-- HERO SECTION -->
-<section class="hero-bg fade-in position-relative" style="background-color: #004d00;">
-    <div class="container text-center text-white position-absolute w-100" style="top: 0; left: 50%; transform: translateX(-50%);">
-        <!-- Welcome Text on Top of the Video -->
-        <h1 class="display-4">Welcome to GAMBIT</h1>
-        <p class="lead">Geographic Analysis and Mapping of Barangay Irrigated Territories</p>
-    </div>
-    
-    <!-- Video Background -->
-    <video class="my-video" autoplay muted loop>
-        <source src="{{ url_for('static', filename='videos/gambit-intro.mp4') }}" type="video/mp4">
-        <source src="{{ url_for('static', filename='videos/gambit-intro.webm') }}" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-</section>
-
-<!-- ABOUT GAMBIT SECTION -->
-<section class="py-5" style="background-color: #003300;">
-    <div class="container">
-        <h2 class="text-center mb-4 text-white">About GAMBIT</h2>
-        <p class="lead text-center text-light">GAMBIT (Geographic Analysis and Mapping of Barangay Irrigated Territories) aims to support farmers in identifying suitable agricultural lands in mountainous regions through advanced geographic data analysis and mapping techniques.</p>
+<section class="hero-bg">
+    <div class="container overlay-text">
+        <h1 class="display-4 fw-bold">Welcome to GAMBIT</h1>
+        <p class="lead">Geographic Analysis And Mapping of Barangay Irrigated Territories</p>
     </div>
 </section>
 
-<!-- OUR PROGRAMS SECTION -->
-<section class="py-5 fade-in" style="background-color: #006400;">
+<!-- GOALS SECTION -->
+<section class="py-5 section-dark">
     <div class="container">
-        <h2 class="text-center mb-4 text-white">Our Goals</h2>
-        <div class="row">
+        <h2 class="goal-header mb-5">GOALS</h2>
+
+        <div class="row text-center">
             <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow border-light">
-                    <div class="card-body">
-                        <h5 class="card-title text-white">Land Mapping</h5>
-                        <p class="card-text text-light">Identify the usability of agricultural land with geographic data to enhance farming practices in mountainous barangays.</p>
-                    </div>
+                <div class="goal-box">
+                    <div style="font-size: 2rem;">🗺️</div>
+                    <h5 class="mt-3">Land Mapping</h5>
+                    <p>Use geographic data to identify usable agricultural land and boost farming efficiency.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow border-light">
-                    <div class="card-body">
-                        <h5 class="card-title text-white">Soil Science</h5>
-                        <p class="card-text text-light">Analyze soil quality and recommend improvements to increase crop yields and soil health in mountainous regions.</p>
-                    </div>
+                <div class="goal-box">
+                    <div style="font-size: 2rem;">🧪</div>
+                    <h5 class="mt-3">Soil Science</h5>
+                    <p>Analyze and improve soil quality to increase productivity and sustainability.</p>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow border-light">
-                    <div class="card-body">
-                        <h5 class="card-title text-white">Farmer Support</h5>
-                        <p class="card-text text-light">Provide tools, resources, and expert advice to farmers to improve productivity and sustainability.</p>
-                    </div>
+                <div class="goal-box">
+                    <div style="font-size: 2rem;">👨‍🌾</div>
+                    <h5 class="mt-3">Farmer Support</h5>
+                    <p>Provide farmers with tools, information, and resources to succeed.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- CALL TO ACTION SECTION -->
-<section class="py-5 bg-dark text-white text-center">
-    <div class="container">
-        <h2 class="mb-3">Helping Farmers Allocate Suitable Agricultural Lands</h2>
-        <p class="lead">We assist farmers in identifying lands that are suitable for farming and those that are not, ensuring effective and sustainable agricultural practices in mountainous regions.</p>
-        <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg">Get in Touch</a>
-    </div>
-</section>
-
-<!-- FOOTER SECTION -->
-<footer class="bg-dark text-center py-4 mt-5 text-white">
-    <p>&copy; 2025 GAMBIT | Empowering farmers through innovative mapping and soil science</p>
-    <p><strong>Contact Information:</strong></p>
-    <p>Email: felquezmagalona27@gmail.com</p>
-    <p>Phone: +639212301647</p>
-    <p><a href="{{ url_for('contact') }}" class="text-light">Contact Us</a></p>
-</footer>
 
 {% endblock %}

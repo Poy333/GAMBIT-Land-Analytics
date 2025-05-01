@@ -1,96 +1,33 @@
-<!-- templates/about.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Background slider -->
-<div class="slider">
-    <div class="slides">
-        <img src="{{ url_for('static', filename='images/about_slider/1.jpg') }}" alt="Slide 1" class="slide">
-        <img src="{{ url_for('static', filename='images/about_slider/2.jpg') }}" alt="Slide 2" class="slide">
-        <img src="{{ url_for('static', filename='images/about_slider/3.jpg') }}" alt="Slide 3" class="slide">
-        <img src="{{ url_for('static', filename='images/about_slider/4.jpg') }}" alt="Slide 4" class="slide">
-        <img src="{{ url_for('static', filename='images/about_slider/5.jpg') }}" alt="Slide 5" class="slide">
-    </div>
-</div>
-
-<div class="container fade-in">
-    <h1>About GAMBIT</h1>
-    <p>
-        Mapping the Future of Farming
-         GAMBIT (Geographic Analysis and Mapping of Barangay Irrigated Territories) is a forward-thinking initiative designed to uplift farmers in highland communities. Through cutting-edge geographic information systems (GIS) and a deep understanding of local agricultural practices, we identify land areas that hold the greatest potential for successful farming. We focus on assessing soil quality and environmental factors to ensure that farmers make informed decisions, using technology to pinpoint areas that are ideal for cultivation while avoiding those that are unsuitable due to poor soil health or other limiting factors. Our goal is to guide farmers toward lands that promise sustainable growth and long-term success.
-    </p>
-    <img src="{{ url_for('static', filename='images/mountain.jpg') }}" alt="Mountain community farm" class="img-fluid">
-</div>
-
-<div class="container fade-in">
-    <h2>Our Vision</h2>
-    <p>
-        Empowering Farmers Through Precision Land Mapping
-        At GAMBIT, we envision a future where every mountain community has access to high-precision maps that provide invaluable insights into land quality. These maps highlight fertile areas that are well-suited for farming, maximizing crop yields, and ensuring sustainability. Equally important, our work identifies land areas with poor soil conditions or other environmental challenges, allowing farmers to avoid cultivating lands that may lead to poor harvests or land degradation. By empowering farmers with data-driven insights into soil health and agricultural viability, we aim to create a more prosperous, sustainable, and environmentally-conscious farming community. With these tools, we help safeguard the future of agriculture, ensuring that land is used efficiently and responsibly.
-    </p>
-</div>
-
-<!-- TEAM GAMBIT -->
-<div class="container fade-in" style="text-align: center;">
-    <h2>TEAM GAMBIT</h2>
-    <p><strong>Leader:</strong> John Godfrey L. Mabini</p>
-    <div style="text-align: center;">
-        <img src="{{ url_for('static', filename='images/john.jpg') }}" alt="John Godfrey L. Mabini" class="img-fluid team-member" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px;">
-    </div>
-</div>
-
-<!-- TEAM MEMBERS (Displayed Horizontally) -->
-<div class="container fade-in">
-    <p><strong>Members:</strong></p>
-    <div class="team-members" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        <div style="text-align: center;">
-            <img src="{{ url_for('static', filename='images/katrina.jpg') }}" alt="Katrina Ababon" class="img-fluid team-member" style="width: 150px; height: 150px; border-radius: 50%;">
-            <p>Katrina Ababon</p>
-        </div>
-        <div style="text-align: center;">
-            <img src="{{ url_for('static', filename='images/cyrooge.jpg') }}" alt="Cyrooge Pansacala" class="img-fluid team-member" style="width: 150px; height: 150px; border-radius: 50%;">
-            <p>Cyrooge Pansacala</p>
-        </div>
-        <div style="text-align: center;">
-            <img src="{{ url_for('static', filename='images/warren.jpg') }}" alt="Warrent Batatas" class="img-fluid team-member" style="width: 150px; height: 150px; border-radius: 50%;">
-            <p>Warrent Batatas</p>
-        </div>
-        <div style="text-align: center;">
-            <img src="{{ url_for('static', filename='images/jenny.jpg') }}" alt="Jenny Mendoza" class="img-fluid team-member" style="width: 150px; height: 150px; border-radius: 50%;">
-            <p>Jenny Mendoza</p>
-        </div>
-        <div style="text-align: center;">
-            <img src="{{ url_for('static', filename='images/carlo.jpg') }}" alt="Carlo Escasinas" class="img-fluid team-member" style="width: 150px; height: 150px; border-radius: 50%;">
-            <p>Carlo Escasinas</p>
-        </div>
-    </div>
-    <div class="team-motivation">
-        <p style="font-style: italic; text-align: center; color: #2c3e50;">
-            "Together, we are building a future where every mountain community can thrive by using the power of data, technology, and local knowledge to cultivate land that nurtures growth and prosperity."
+<!-- About GAMBIT Section with Text and Image -->
+<div class="about-section">
+    <div class="about-box">
+        <h1>ABOUT GAMBIT</h1>
+        <p>
+            GAMBIT is an initiative designed to enhance the sustainable development of agricultural lands in the mountain barangays of Cebu. Through advanced geographic analysis and mapping, we aim to identify and promote usable agricultural lands while addressing soil quality concerns. Our project is focused on empowering local farmers with the knowledge and tools they need to optimize land use for greater productivity and sustainability.
+        </p>
+        <p>
+            By mapping out irrigated territories and studying land usability, GAMBIT provides insights that enable farmers to make informed decisions about land management, crop selection, and soil improvement. We also work closely with local authorities and experts to improve the quality of farming practices across these regions.
         </p>
     </div>
+    <div class="about-image">
+        <img src="{{ url_for('static', filename='images/mountain.jpg') }}" alt="Mountain" />
+    </div>
 </div>
 
-<script>
-    let currentSlide = 0; // Track the current slide
-    const slides = document.querySelectorAll('.slide'); // Select all the slide images
-    const totalSlides = slides.length;
+<!-- Our Vision Section with Text and Image -->
+<div class="vision-section">
+    <div class="vision-box">
+        <h1>OUR VISION</h1>
+        <p>At GAMBIT, our vision is to create a sustainable, thriving agricultural ecosystem in the mountain barangays of Cebu. We envision a future where every piece of land is utilized to its fullest potential, with farmers equipped with the knowledge, resources, and support they need to improve their livelihoods.</p>
+        <p>Our goal is to identify lands that are suitable for farming, while also recognizing areas with poor soil quality, so that farmers can avoid unproductive areas and focus on more viable, fertile land. By combining advanced mapping technologies with soil science and farmer education, we hope to contribute to the long-term prosperity of the region’s agricultural sector.</p>
+        <p>Through the GAMBIT initiative, we aim to empower local communities to make informed decisions about their land and farming practices, leading to improved agricultural yields, reduced environmental impact, and enhanced food security.</p>
+    </div>
+    <div class="vision-image">
+        <img src="{{ url_for('static', filename='images/your_vision.jpg') }}" alt="Our Vision" />
+    </div>
+</div>
 
-    function showNextSlide() {
-        // Hide all slides
-        slides.forEach(slide => slide.style.display = 'none');
-        
-        // Show the current slide
-        slides[currentSlide].style.display = 'block';
-
-        // Move to the next slide, looping back to the first one
-        currentSlide = (currentSlide + 1) % totalSlides;
-    }
-
-    // Initialize the first slide
-    showNextSlide();
-
-    // Change the slide every 5 seconds
-    setInterval(showNextSlide, 5000);
-</script>
 {% endblock %}

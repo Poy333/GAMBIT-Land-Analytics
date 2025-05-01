@@ -1,29 +1,82 @@
-<!-- templates/land_mapping.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="text-center mb-4">Land Mapping for Mountain Agriculture</h1>
-    <div class="container">
-        <p>Welcome to the Land Mapping section. Below are images of various land areas across different barangays, showcasing suitable and unsuitable land for farming.</p>
-        
-        <!-- Displaying the images -->
-        <div class="row">
-            <!-- Suitable Land -->
-            <div class="col-md-6 mb-4">
-                <h3 class="text-center">Suitable Land</h3>
-                <img src="{{ url_for('static', filename='images/suitable_land_example.jpg') }}" alt="Suitable Land Example" class="img-fluid">
-                <p class="text-center">Example of suitable land for farming.</p>
-            </div>
+<div class="container">
+    <h1 class="text-center mb-4 text-white">Land Mapping for Mountain Barangays</h1>
+    <p class="text-center text-white">This page shows the classification of land as suitable or not suitable for farming, per sitio in each barangay.</p>
 
-            <!-- Not Suitable Land -->
-            <div class="col-md-6 mb-4">
-                <h3 class="text-center">Not Suitable Land</h3>
-                <img src="{{ url_for('static', filename='images/not_suitable_land_example.jpg') }}" alt="Not Suitable Land Example" class="img-fluid">
-                <p class="text-center">Example of land not suitable for farming.</p>
+    <div id="barangays-container">
+        {% for barangay in barangays %}
+            <div class="barangay-box mb-4" style="cursor: pointer; border: 1px solid #ccc; padding: 10px; border-radius: 5px;" onclick="toggleSitios('{{ barangay.name }}')">
+                <h3 class="text-white">{{ barangay.name }}</h3>
             </div>
+            
+            <!-- Sitios for Barangay -->
+            <div class="sitios-container" id="sitios-{{ barangay.name }}" style="display: none;">
+                {% for sitio in barangay.sitios %}
+                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #f0f0f0; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio.name }}', '{{ barangay.name }}', {{ sitio.suitable|tojson }}, {{ sitio.not_suitable|tojson }})">
+                        <h4 class="text-white">{{ sitio.name }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Suitable and Not Suitable Land Images -->
+    <div id="suitable-options" style="display: none;">
+        <div id="suitable-images" style="display: none;">
+            <h5 class="text-white">✅ Suitable Land</h5>
+            <div id="suitable-images-container"></div>
         </div>
 
-        <p> Explore different areas and assess the land's suitability for farming in the mountain barangays.
-            Below are the mountain barangays in Cebu City that we surveyed. In each area, we evaluated and classified the land as either suitable or not suitable for farming based on various factors such as soil quality, slope, water availability, and accessibility.</p>
+        <div id="not-suitable-images" style="display: none;">
+            <h5 class="text-white">❌ Not Suitable Land</h5>
+            <div id="not-suitable-images-container"></div>
+        </div>
     </div>
+</div>
+
+<script>
+    // Function to show or hide the sitios based on barangay click
+    function toggleSitios(barangayName) {
+        const sitiosContainer = document.getElementById('sitios-' + barangayName);
+        sitiosContainer.style.display = (sitiosContainer.style.display === 'none') ? 'block' : 'none';
+    }
+
+    // Function to display suitable/not suitable images based on selected sitio
+    function showSuitableOptions(sitioName, barangayName, suitableImages, notSuitableImages) {
+        // Ask the user whether they want to see suitable or not suitable images
+        const isSuitable = confirm('Do you want to see Suitable land images for ' + sitioName + '?');
+
+        // Clear previous images
+        document.getElementById('suitable-images-container').innerHTML = '';
+        document.getElementById('not-suitable-images-container').innerHTML = '';
+
+        // Show suitable images if the user selects "Yes"
+        if (isSuitable && suitableImages.length > 0) {
+            document.getElementById('suitable-images').style.display = 'block';
+            suitableImages.forEach(function(img) {
+                const imgElement = document.createElement('img');
+                imgElement.src = "{{ url_for('static', filename='') }}" + img;
+                imgElement.classList.add('img-fluid', 'mb-2');
+                document.getElementById('suitable-images-container').appendChild(imgElement);
+            });
+        } else {
+            document.getElementById('suitable-images').style.display = 'none';
+        }
+
+        // Show not suitable images if the user selects "No"
+        if (!isSuitable && notSuitableImages.length > 0) {
+            document.getElementById('not-suitable-images').style.display = 'block';
+            notSuitableImages.forEach(function(img) {
+                const imgElement = document.createElement('img');
+                imgElement.src = "{{ url_for('static', filename='') }}" + img;
+                imgElement.classList.add('img-fluid', 'mb-2');
+                document.getElementById('not-suitable-images-container').appendChild(imgElement);
+            });
+        } else {
+            document.getElementById('not-suitable-images').style.display = 'none';
+        }
+    }
+</script>
 {% endblock %}

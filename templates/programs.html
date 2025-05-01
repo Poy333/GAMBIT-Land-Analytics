@@ -1,105 +1,292 @@
 {% extends "base.html" %}
 
 {% block content %}
-<style>
-    .slideshow-container {
-        position: relative;
-        width: 100%;
-        height: 60vh;
-        overflow: hidden;
-    }
+<!-- Main container with flex layout -->
+<div class="program-container">
+    <!-- Program Box (now full-width) -->
+    <div class="program-box">
+        <h2 class="program-title">OUR PROGRAM</h2>
+        <div class="program-content">
+            <p>The GAMBIT project is dedicated to improving agricultural land use in the mountain barangays of Cebu, focusing on assessing the viability of farming areas and identifying lands that may not be suitable for cultivation due to poor soil quality or other environmental factors.</p>
+            <p>As part of our research, we conducted a thorough survey across five key barangays: BABAG, BON BON, BUOT, SUDLON 1, and MALUBOG. These barangays were carefully chosen for their distinct geographical features and diverse agricultural practices. Our survey methodology included a mix of soil testing, interviews with local farmers, and data collection on current land usage and farming techniques.</p>
+            
+            <!-- OBJECTIVES BUTTON -->
+            <button onclick="openObjectives()" class="objectives-button">OBJECTIVES</button>
+        </div>
+    </div>
 
-    .slide {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: none;
-        object-fit: cover;
-        animation-name: fade;
-        animation-duration: 1s;
-    }
-
-    @keyframes fade {
-        from { opacity: 0.4; }
-        to { opacity: 1; }
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        color: white;
-        text-align: center;
-        padding-top: 20vh;
-    }
-
-    .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 100, 0, 0.6); /* Dark green overlay */
-        z-index: 1;
-    }
-</style>
-
-<!-- Hero Section with Slideshow -->
-<div class="slideshow-container">
-    <!-- Slides -->
-    <img class="slide" src="{{ url_for('static', filename='images/image1.jpg') }}">
-    <img class="slide" src="{{ url_for('static', filename='images/image2.jpg') }}">
-    <img class="slide" src="{{ url_for('static', filename='images/image3.jpg') }}">
-    <img class="slide" src="{{ url_for('static', filename='images/image4.jpg') }}">
-
-    <!-- Overlay for text readability -->
-    <div class="hero-overlay"></div>
-
-    <!-- Text content -->
-    <div class="hero-content">
-        <h1 class="fade-in">WHAT WE DO?</h1>
-        <p class="fade-in">We assist farmers in identifying and allocating suitable land for agriculture, conducting thorough surveys, and providing a range of support services to enhance productivity and sustainability.</p>
+    <!-- Images section aligned to the right -->
+    <div class="image-column">
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Image 1" class="zoomable">
+        <img src="{{ url_for('static', filename='images/2.jpg') }}" alt="Image 2" class="zoomable">
+        <img src="{{ url_for('static', filename='images/3.jpg') }}" alt="Image 3" class="zoomable">
+        <img src="{{ url_for('static', filename='images/4.jpg') }}" alt="Image 4" class="zoomable">
+        <img src="{{ url_for('static', filename='images/5.jpg') }}" alt="Image 5" class="zoomable">
     </div>
 </div>
 
-<!-- Program Descriptions -->
-<section class="fade-in mt-4" style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
-    <h2 style="color: #006400;">Land Identification Workshops</h2>
-    <p>We conduct practical workshops where farmers and local communities are trained to identify potential land suitable for farming. These workshops emphasize using geographic tools and soil analysis to assess land quality and suitability for various crops.</p>
-</section>
+<!-- Modal for zoomed-in images -->
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
+    <div id="caption"></div>
+</div>
 
-<section class="fade-in mt-3" style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
-    <h2 style="color: #006400;">Soil Quality Surveys</h2>
-    <p>Our team works closely with local farmers to survey land and analyze soil conditions. This data is used to help identify areas that are ideal for farming and those that require interventions to improve soil health.</p>
-</section>
+<!-- Modal for Objectives -->
+<div id="objectivesModal" class="modal">
+    <span class="close" onclick="closeObjectives()">&times;</span>
+    <div class="modal-content objectives-box">
+        <h3>PROJECT OBJECTIVES</h3>
+        <ul>
+            <li>1. To assess the current usability of agricultural lands in selected mountain barangays.</li>
+            <li>2. To identify areas with poor soil quality unsuitable for farming.</li>
+            <li>3. To collect and analyze data on farming techniques and land management.</li>
+            <li>4. To provide recommendations for sustainable agricultural practices.</li>
+        </ul>
+    </div>
+</div>
 
-<section class="fade-in mt-3" style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
-    <h2 style="color: #006400;">Mapping & Data Analysis for Agricultural Land Use</h2>
-    <p>We gather geographic data, including topography and climate, to help farmers understand which areas are the best for farming. Using this information, we create detailed maps and analysis that guide land use planning and crop decisions.</p>
-</section>
+<!-- CSS -->
+<style>
+    .program-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 20px;
+        gap: 20px;
+    }
 
-<section class="fade-in mt-3 mb-5" style="background-color: #f4f4f4; padding: 20px; border-radius: 8px;">
-    <h2 style="color: #006400;">Community Collaboration</h2>
-    <p>Our research is not only about finding land for farming but also about creating a community-driven approach to sustainable land use. By working together with local communities, we ensure that our findings are aligned with their needs and environmental conditions.</p>
-</section>
+    .program-box {
+        flex: 2;
+        padding-left: 20px;
+        max-width: 65%;
+    }
 
-<!-- Slideshow Script -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let slideIndex = 0;
-        const slides = document.getElementsByClassName("slide");
+    .program-title {
+        font-size: 36px;
+        color: black;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 
-        function showSlides() {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1; }
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 3000); // Change every 3 seconds
+    .program-content {
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: black;
+    }
+
+    .program-box p {
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .image-column {
+        position: fixed;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    .image-column img {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    /* OBJECTIVES BUTTON */
+    .objectives-button {
+        background-color: #2a7b36;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .objectives-button:hover {
+        background-color: #25682e;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .objectives-box {
+        text-align: left;
+        background: url("{{ url_for('static', filename='images/clouds.jpg') }}") no-repeat center center;
+        background-size: cover;
+        padding: 20px;
+        border-radius: 10px;
+        color: black; /* Changed font color to black */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .objectives-box h3 {
+        margin-top: 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .objectives-box ul {
+        padding-left: 20px;
+    }
+
+    .objectives-box li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Animation for Modal */
+    .modal {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.8);
         }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
 
-        showSlides();
+    .objectives-box {
+        opacity: 0;
+        animation: slideIn 0.5s forwards;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+<!-- JavaScript for Modal and Arrow Navigation -->
+<script>
+    var modal = document.getElementById("myModal");
+    var images = document.querySelectorAll(".zoomable");
+    var modalImg = document.getElementById("modalImg");
+    var captionText = document.getElementById("caption");
+    var currentIndex = 0;
+
+    images.forEach(function(img, index) {
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+            currentIndex = index;
+        };
     });
+
+    // Close the modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // Navigate using arrow keys (left/right)
+    document.addEventListener('keydown', function(event) {
+        if (modal.style.display === "block") {
+            if (event.key === "ArrowRight") {
+                nextImage();
+            } else if (event.key === "ArrowLeft") {
+                previousImage();
+            }
+        }
+    });
+
+    // Next image
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        modalImg.src = images[currentIndex].src;
+        captionText.innerHTML = images[currentIndex].alt;
+    }
+
+    // Previous image
+    function previousImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        modalImg.src = images[currentIndex].src;
+        captionText.innerHTML = images[currentIndex].alt;
+    }
+
+    // Close the modal if clicked outside of the modal content
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        if (event.target == objectivesModal) {
+            objectivesModal.style.display = "none";
+        }
+    };
+
+    // OBJECTIVES MODAL
+    function openObjectives() {
+        document.getElementById("objectivesModal").style.display = "block";
+    }
+
+    function closeObjectives() {
+        document.getElementById("objectivesModal").style.display = "none";
+    }
 </script>
 
 {% endblock %}

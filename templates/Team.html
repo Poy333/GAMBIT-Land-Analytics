@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Team Section -->
+<div class="team-section">
+    <style>
+        /* Adding white text with black outline */
+        .outline-text {
+            color: white; /* White text color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Black outline effect */
+        }
+
+        /* Team Section */
+        .team-section {
+            margin: 50px;
+            text-align: center;
+        }
+
+        .team-introduction h1,
+        .team-introduction p,
+        .team-member h2,
+        .team-member .role,
+        .team-member p {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Black outline effect */
+        }
+
+        .team-introduction h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .team-introduction p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        /* Team Members */
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 30px;
+        }
+
+        .team-member {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            width: 280px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member-image img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .team-member h2 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .team-member .role {
+            font-style: italic;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .team-member p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #f5f5f5;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .team-members {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+
+    <div class="team-introduction">
+        <h1 class="outline-text">Meet Our Team</h1>
+        <p class="outline-text">At GAMBIT, we are a diverse group of students working together to make a difference in the agricultural sector of Cebu's mountain barangays. Our team is focused on understanding geography, soil science, farming, technology, and web development, and how these fields come together to support sustainable agriculture.</p>
+    </div>
+
+    <!-- Team Members -->
+    <div class="team-members">
+        <!-- Leader -->
+        <div class="team-member">
+            <div class="team-member-image">
+                <img src="{{ url_for('static', filename='images/john.jpg') }}" alt="John Godfrey L. Mabini" />
+            </div>
+            <div class="team-member-info">
+                <h2 class="outline-text">John Godfrey L. Mabini</h2>
+                <p class="role outline-text">Leader & Website Developer</p>
+                <p class="outline-text">As the leader of the GAMBIT team, I manage the website development to showcase the mission and vision of the project. My expertise in web development ensures the platform’s functionality and usability.</p>
+            </div>
+        </div>
+
+        <!-- Member 1 -->
+        <div class="team-member">
+            <div class="team-member-image">
+                <img src="{{ url_for('static', filename='images/katrina.jpg') }}" alt="Katrina Ababon" />
+            </div>
+            <div class="team-member-info">
+                <h2 class="outline-text">Katrina Ababon</h2>
+                <p class="role outline-text">Team Member</p>
+                <p class="outline-text">Katrina brings her expertise in agricultural technology to the team, helping bridge the gap between innovation and farming practices in Cebu's mountain barangays.</p>
+            </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="team-member">
+            <div class="team-member-image">
+                <img src="{{ url_for('static', filename='images/jenny.jpg') }}" alt="Jenny Mendoza" />
+            </div>
+            <div class="team-member-info">
+                <h2 class="outline-text">Jenny Mendoza</h2>
+                <p class="role outline-text">Team Member</p>
+                <p class="outline-text">Jenny specializes in soil health and environmental science. She evaluates land conditions to optimize farming practices across the region.</p>
+            </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="team-member">
+            <div class="team-member-image">
+                <img src="{{ url_for('static', filename='images/warren.jpg') }}" alt="Warren Batatas" />
+            </div>
+            <div class="team-member-info">
+                <h2 class="outline-text">Warren Batatas</h2>
+                <p class="role outline-text">Team Member</p>
+                <p class="outline-text">Warren focuses on geographic information systems (GIS) and mapping technologies, ensuring accurate land analysis for the GAMBIT project.</p>
+            </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="team-member">
+            <div class="team-member-image">
+                <img src="{{ url_for('static', filename='images/cyrooge.jpg') }}" alt="Cyrooge Pansacala" />
+            </div>
+            <div class="team-member-info">
+                <h2 class="outline-text">Cyrooge Pansacala</h2>
+                <p class="role outline-text">Team Member</p>
+                <p class="outline-text">Cyrooge works on data analysis and field research to gather valuable insights on land suitability and farming practices in Cebu's mountain barangays.</p>
+            </div>
+        </div>
+
+        <!-- Member 5 -->
+        <div class="team-member">
+            <div class="team-member-image">
+                <img src="{{ url_for('static', filename='images/carlo.jpg') }}" alt="Carlo Escasinas" />
+            </div>
+            <div class="team-member-info">
+                <h2 class="outline-text">Carlo Escasinas</h2>
+                <p class="role outline-text">Team Member</p>
+                <p class="outline-text">Carlo supports the team with expertise in agricultural practices and contributes to the development of practical solutions for sustainable farming.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
