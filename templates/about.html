@@ -30,4 +30,73 @@
     </div>
 </div>
 
+<!-- Meet Our Team Section -->
+<div class="team-section" style="margin: 50px; text-align: center;">
+    <style>
+        .team-section h1, .team-section p, .team-member h2, .team-member .role {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .team-members {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+
+    <h1>Meet Our Team</h1>
+    <p>We are a team of students from Cebu Technological University Cebu City Mountain Satellite Campus (CTU-CCMSC), pursuing a Bachelor of Industrial Technology Major in Computer (BIT-2A). We are committed to improving agriculture in Cebu's mountain barangays through technology and science.</p>
+
+    <div class="team-members">
+        {% set members = [
+            {"name": "John Godfrey L. Mabini", "role": "Leader & Website Developer", "img": "john.jpg", "desc": "John leads the team and develops the GAMBIT website."},
+            {"name": "Katrina Ababon", "role": "Team Member", "img": "katrina.jpg", "desc": "Katrina focuses on agricultural technology."},
+            {"name": "Jenny Mendoza", "role": "Team Member", "img": "jenny.jpg", "desc": "Jenny looks into soil health and land evaluation."},
+            {"name": "Warren Batatas", "role": "Team Member", "img": "warren.jpg", "desc": "Warren works on GIS and land mapping."},
+            {"name": "Cyrooge Pansacala", "role": "Team Member", "img": "cyrooge.jpg", "desc": "Cyrooge handles field research and data analysis."},
+            {"name": "Carlo Escasinas", "role": "Team Member", "img": "carlo.jpg", "desc": "Carlo supports farming practice improvements."}
+        ] %}
+
+        {% for m in members %}
+        <div class="team-member">
+            <img src="{{ url_for('static', filename='images/' ~ m.img) }}" alt="{{ m.name }}">
+            <h2>{{ m.name }}</h2>
+            <p class="role">{{ m.role }}</p>
+            <p>{{ m.desc }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

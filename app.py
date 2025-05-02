@@ -98,9 +98,7 @@ def land_mapping():
     ]
     return render_template('land_mapping.html', barangays=barangays)
 
-@app.route('/team')
-def team():
-    return render_template('team.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

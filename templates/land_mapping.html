@@ -3,9 +3,17 @@
 {% block content %}
 <div class="container">
     <h1 class="text-center mb-4 text-white">Land Mapping for Mountain Barangays</h1>
-    <p class="text-center text-white">This page shows the classification of land as suitable or not suitable for farming, per sitio in each barangay.</p>
+    <p class="text-center text-white">This page shows the classification of land as suitable or not suitable for farming, per sitio in each barangay. We are conducting a survey for the following barangays: Babag, Bon-bon, Buot, Sudlon 1, and Malubog. Each barangay has 5 sitios.</p>
 
     <div id="barangays-container">
+        {% set barangays = [
+            {"name": "Babag", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]},
+            {"name": "Bon-bon", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]},
+            {"name": "Buot", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]},
+            {"name": "Sudlon 1", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]},
+            {"name": "Malubog", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]}
+        ] %}
+
         {% for barangay in barangays %}
             <div class="barangay-box mb-4" style="cursor: pointer; border: 1px solid #ccc; padding: 10px; border-radius: 5px;" onclick="toggleSitios('{{ barangay.name }}')">
                 <h3 class="text-white">{{ barangay.name }}</h3>
@@ -14,8 +22,8 @@
             <!-- Sitios for Barangay -->
             <div class="sitios-container" id="sitios-{{ barangay.name }}" style="display: none;">
                 {% for sitio in barangay.sitios %}
-                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #f0f0f0; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio.name }}', '{{ barangay.name }}', {{ sitio.suitable|tojson }}, {{ sitio.not_suitable|tojson }})">
-                        <h4 class="text-white">{{ sitio.name }}</h4>
+                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #f0f0f0; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', '{{ barangay.name }}')">
+                        <h4 class="text-white">{{ sitio }}</h4>
                     </div>
                 {% endfor %}
             </div>
@@ -44,9 +52,14 @@
     }
 
     // Function to display suitable/not suitable images based on selected sitio
-    function showSuitableOptions(sitioName, barangayName, suitableImages, notSuitableImages) {
+    function showSuitableOptions(sitioName, barangayName) {
+        // For now, let's simulate fetching suitable and not suitable images.
+        // You can update this logic to fetch real data based on the sitio
+        const suitableImages = ["image1.jpg", "image2.jpg"]; // Replace with actual image filenames
+        const notSuitableImages = ["image3.jpg", "image4.jpg"]; // Replace with actual image filenames
+
         // Ask the user whether they want to see suitable or not suitable images
-        const isSuitable = confirm('Do you want to see Suitable land images for ' + sitioName + '?');
+        const isSuitable = confirm('Do you want to see Suitable land images for ' + sitioName + ' in ' + barangayName + '?');
 
         // Clear previous images
         document.getElementById('suitable-images-container').innerHTML = '';
@@ -57,7 +70,7 @@
             document.getElementById('suitable-images').style.display = 'block';
             suitableImages.forEach(function(img) {
                 const imgElement = document.createElement('img');
-                imgElement.src = "{{ url_for('static', filename='') }}" + img;
+                imgElement.src = "{{ url_for('static', filename='') }}" + img; // Construct image URL
                 imgElement.classList.add('img-fluid', 'mb-2');
                 document.getElementById('suitable-images-container').appendChild(imgElement);
             });
@@ -70,7 +83,7 @@
             document.getElementById('not-suitable-images').style.display = 'block';
             notSuitableImages.forEach(function(img) {
                 const imgElement = document.createElement('img');
-                imgElement.src = "{{ url_for('static', filename='') }}" + img;
+                imgElement.src = "{{ url_for('static', filename='') }}" + img; // Construct image URL
                 imgElement.classList.add('img-fluid', 'mb-2');
                 document.getElementById('not-suitable-images-container').appendChild(imgElement);
             });
