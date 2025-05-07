@@ -1,19 +1,23 @@
-/* Global body styles */
+/* ============================= */
+/* Global Styles for Body       */
+/* ============================= */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
     background-color: #f0f8f5; /* Soft earth-tone background */
-    height: 100%; /* Ensure the body takes full height */
-    background-image: url('/static/images/background.jpg'); /* Correct path to your background image */
+    height: 100%;
+    background-image: url('/static/images/background.jpg');
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed; /* Keeps the background fixed while scrolling */
-    background-size: cover; /* Ensures the background image covers the entire screen */
+    background-attachment: fixed;
+    background-size: cover;
 }
 
-/* Hero section */
+/* ============================= */
+/* Hero Section Styles           */
+/* ============================= */
 .hero-bg {
     position: relative;
     height: 100vh;
@@ -48,23 +52,28 @@ body {
     z-index: 10;
 }
 
+/* ============================= */
+/* Button Styles                 */
+/* ============================= */
 .btn {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 10px;
     text-decoration: none;
     border-radius: 4px;
-    background-color: #28a745; /* Green button */
+    background-color: #28a745;
     color: white;
     transition: transform 0.2s ease;
 }
 
 .btn:hover {
     transform: scale(1.05);
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838;
 }
 
-/* Fade-in effect */
+/* ============================= */
+/* Animation for Fade In Effect  */
+/* ============================= */
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
@@ -92,42 +101,46 @@ body {
     }
 }
 
-/* Navbar brand with logo */
+/* ============================= */
+/* Navbar Brand with Logo        */
+/* ============================= */
 .navbar-brand {
     display: flex;
     align-items: center;
     font-size: 1.8rem;
-    color: #28a745; /* Green text */
+    color: #28a745;
 }
 
 .navbar-brand .logo-img {
     width: 50px;
-    height: 50px; /* Set the height to match the width for a perfect circle */
-    border-radius: 50%; /* Makes the image circular */
-    object-fit: cover; /* Ensures the image fills the circle while maintaining aspect ratio */
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
     margin-right: 10px;
 }
 
-/* Navbar Links */
+/* ============================= */
+/* Navbar Links Styles           */
+/* ============================= */
 .navbar-nav .nav-link {
-    color: white; /* Change link color to white */
+    color: white;
     font-size: 1.1rem;
     text-transform: uppercase;
     padding: 15px 20px;
-    transition: color 0.3s ease; /* Smooth transition on hover */
+    transition: color 0.3s ease;
 }
 
-/* Navbar Links Hover */
 .navbar-nav .nav-link:hover {
-    color: #f0f8f5; /* Light color for hover effect */
+    color: #f0f8f5;
 }
 
-/* Active Link Color */
 .navbar-nav .nav-item.active .nav-link {
-    color: #f0f8f5; /* Light color for active link */
+    color: #f0f8f5;
 }
 
-/* Footer Message */
+/* ============================= */
+/* Footer Message Styles         */
+/* ============================= */
 .footer-message {
     text-align: center;
     position: absolute;
@@ -139,25 +152,46 @@ body {
     text-shadow: 1px 1px 2px black;
 }
 
-/* About Section for "ABOUT GAMBIT" */
+/* ============================= */
+/* ABOUT GAMBIT Section          */
+/* ============================= */
 .about-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 30px;
     margin: 50px;
-    flex-wrap: wrap; /* mobile responsiveness */
+    flex-wrap: wrap;
 }
 
-/* Text Box */
 .about-box {
     flex: 1;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px 30px;
     border-radius: 10px;
+    margin: 50px 0;
+    width: 100%;
+    max-width: none;
+    text-align: left;
 }
 
-/* Circular Image Box */
+.about-box h1 {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.about-box p {
+    color: white;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
 .about-image {
     flex-shrink: 0;
     display: flex;
@@ -174,19 +208,26 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
-/* About Box for "ABOUT GAMBIT" */
-.about-box {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px 30px;
-    text-align: left;
-    border-radius: 10px;
-    margin: 50px 0 50px 0; /* fully flush left */
-    width: 100%;
-    max-width: none;
+/* ============================= */
+/* OUR VISION Section            */
+/* ============================= */
+.vision-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin: 50px;
+    flex-wrap: wrap;
 }
 
-/* Title for "ABOUT GAMBIT" */
-.about-box h1 {
+.vision-box {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+
+.vision-box h1 {
     color: white;
     font-size: 2rem;
     font-weight: bold;
@@ -196,33 +237,13 @@ body {
     text-align: left;
 }
 
-/* Paragraphs inside the About Box */
-.about-box p {
+.vision-box p {
     color: white;
     font-size: 1rem;
     line-height: 1.6;
     text-align: left;
 }
 
-/* Our Vision Section for "OUR VISION" */
-.vision-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    margin: 50px;
-    flex-wrap: wrap; /* mobile responsiveness */
-}
-
-/* Text Box */
-.vision-box {
-    flex: 1;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px 30px;
-    border-radius: 10px;
-}
-
-/* Circular Image Box for Vision */
 .vision-image {
     flex-shrink: 0;
     display: flex;
@@ -239,26 +260,9 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
-/* Title for "OUR VISION" */
-.vision-box h1 {
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-/* Paragraphs inside the Vision Box */
-.vision-box p {
-    color: white;
-    font-size: 1rem;
-    line-height: 1.6;
-    text-align: left;
-}
-
-/* Team Section */
+/* ============================= */
+/* Team Section                  */
+/* ============================= */
 .team-section {
     margin: 50px;
     text-align: center;
@@ -277,7 +281,9 @@ body {
     margin-bottom: 40px;
 }
 
-/* Team Members */
+/* ============================= */
+/* Team Members Styles           */
+/* ============================= */
 .team-members {
     display: flex;
     flex-wrap: wrap;
@@ -327,7 +333,9 @@ body {
     color: #f5f5f5;
 }
 
-/* Mobile Responsiveness */
+/* ============================= */
+/* Mobile Responsive Adjustments */
+/* ============================= */
 @media (max-width: 768px) {
     .team-members {
         flex-direction: column;

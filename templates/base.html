@@ -5,19 +5,19 @@
     <title>GAMBIT - Mapping for Mountain Agriculture</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS (for styling the navigation bar and layout) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
-    <!-- Link to custom CSS -->
+    <!-- Link to custom CSS (for additional styles specific to the website) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
     <style>
-        /* Override navbar-light's link color */
+        /* Override navbar-light's link color to white */
         .navbar-light .navbar-nav .nav-link {
             color: #ffffff !important;
         }
 
-        /* Navbar Links Hover */
+        /* Change navbar link color on hover */
         .navbar-nav .nav-link:hover {
             color: #f0f8f5 !important;
         }
@@ -28,19 +28,22 @@
             justify-content: flex-start;
         }
 
+        /* Add padding to each navbar item */
         .navbar-nav .nav-item {
             padding-left: 20px;
         }
 
-        /* Smooth Scroll */
+        /* Smooth scroll behavior when clicking on links */
         html {
             scroll-behavior: smooth;
         }
 
+        /* Page fade-in animation when loaded */
         body {
             animation: fadeInPage 1s ease-out;
         }
 
+        /* Keyframes for fade-in effect */
         @keyframes fadeInPage {
             0% {
                 opacity: 0;
@@ -50,7 +53,7 @@
             }
         }
 
-        /* Active Link Highlight */
+        /* Active link highlighting */
         .navbar-nav .nav-link.active {
             font-weight: bold;
             color: #f0f8f5 !important;
@@ -58,14 +61,24 @@
     </style>
 </head>
 <body>
+    <!-- Header Section with Navigation Bar -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light navbar-green">
+            <!-- Logo and Brand -->
             <a class="navbar-brand" href="{{ url_for('index') }}">
                 <img src="/static/images/logo.png" alt="Gambit Logo" class="logo-img">
                 GAMBIT
             </a>
-            <div class="collapse navbar-collapse">
+            
+            <!-- Mobile Toggler Button (for small screens) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links (collapsed in mobile) -->
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <!-- Navigation links -->
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About & Team</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('programs') }}">Programs</a></li>
@@ -77,19 +90,22 @@
         </nav>
     </header>
 
+    <!-- Main Content Section -->
     <main class="container mt-4">
+        <!-- Dynamic content block (content from specific pages will be injected here) -->
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Footer Section -->
     <footer class="bg-light text-center py-3 mt-4">
         <p>&copy; 2025 GAMBIT. Empowering communities through data-driven agriculture.</p>
     </footer>
 
-    <!-- Bootstrap JS and dependencies -->
+    <!-- Bootstrap JS and dependencies (required for interactive elements like dropdowns) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Fade-in Script -->
+    <!-- Fade-in effect for page load and navbar link highlighting -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const navbarLinks = document.querySelectorAll('.navbar-nav .nav-link');
@@ -99,17 +115,20 @@
                     const targetId = this.getAttribute('href').slice(1);
                     const targetSection = document.getElementById(targetId);
                     if (targetSection) {
+                        // Smooth scroll to the section
                         window.scrollTo({
                             top: targetSection.offsetTop,
                             behavior: "smooth"
                         });
                     }
 
+                    // Highlight the active link in the navbar
                     navbarLinks.forEach(link => link.classList.remove('active'));
                     this.classList.add('active');
                 });
             });
 
+            // Fade-in effect for elements as they come into view
             const faders = document.querySelectorAll('.fade-in');
             const appearOptions = {
                 threshold: 0.1,
@@ -122,6 +141,8 @@
                     observer.unobserve(entry.target);
                 });
             }, appearOptions);
+
+            // Observe fade-in elements
             faders.forEach(fader => {
                 appearOnScroll.observe(fader);
             });

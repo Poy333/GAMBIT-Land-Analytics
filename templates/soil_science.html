@@ -2,18 +2,19 @@
 
 {% block content %}
 <div class="container fade-in">
-    <!-- Understanding Soil for Improved Irrigation Box -->
+    <!-- Section for displaying insights about soil for improved irrigation -->
     <div class="soil-insights-box">
         <h2>Understanding Soil for Improved Irrigation: Insights from GAMBIT Mapping</h2>
     </div>
 
-    <!-- Two Side-by-Side Boxes -->
+    <!-- Two side-by-side boxes to display suitable and not-suitable land information -->
     <div class="row mt-4">
-        <!-- Suitable Land -->
+        <!-- Suitable Land Section -->
         <div class="col-md-6">
             <div class="land-box suitable">
                 <h3>SUITABLE LAND</h3>
                 <div class="suitable-buttons mt-3">
+                    <!-- Buttons for different types of suitable land, each triggering a modal -->
                     <button class="btn m-2" data-toggle="modal" data-target="#arableModal" aria-label="Learn about Arable Land">Arable Land</button>
                     <button class="btn m-2" data-toggle="modal" data-target="#drainedModal" aria-label="Learn about Well-Drained Land">Well-Drained Land</button>
                     <button class="btn m-2" data-toggle="modal" data-target="#fertileModal" aria-label="Learn about Fertile Land">Fertile Land</button>
@@ -23,11 +24,12 @@
             </div>
         </div>
 
-        <!-- Not Suitable Land -->
+        <!-- Not Suitable Land Section -->
         <div class="col-md-6">
             <div class="land-box not-suitable">
                 <h3>NOT-SUITABLE LAND</h3>
                 <div class="not-suitable-buttons mt-3">
+                    <!-- Buttons for different types of not-suitable land, each triggering a modal -->
                     <button class="btn btn-danger m-2" data-toggle="modal" data-target="#rockyModal" aria-label="Learn about Rocky Land">Rocky Land</button>
                     <button class="btn btn-danger m-2" data-toggle="modal" data-target="#waterloggedModal" aria-label="Learn about Waterlogged Land">Waterlogged Land</button>
                     <button class="btn btn-danger m-2" data-toggle="modal" data-target="#steepModal" aria-label="Learn about Steep Land">Steep Land</button>
@@ -38,7 +40,7 @@
         </div>
     </div>
 
-    <!-- Explanation Section -->
+    <!-- Explanation Section on the Importance of Understanding Suitable and Not-Suitable Land -->
     <div class="row mt-5">
         <div class="col-12">
             <div class="explanation-box">
@@ -50,7 +52,7 @@
 
 </div>
 
-<!-- Modals for Suitable Land -->
+<!-- Modal definitions for each type of suitable land (using dynamic loops for less code duplication) -->
 {% for modal_id, modal_title, modal_content in [
     ('arableModal', 'Arable Land', 'Arable land is suitable for farming as it is well-drained, has a deep soil profile, and supports plant growth with sufficient nutrients. It is often flat and free of obstructions, making it ideal for cultivation.'),
     ('drainedModal', 'Well-Drained Land', 'Well-drained land has good water movement, preventing waterlogging that could harm plant roots. This type of land is essential for most crops, providing ideal conditions for root growth and nutrient absorption.'),
@@ -58,7 +60,7 @@
     ('flatModal', 'Flat Land', 'Flat land is ideal for farming because it allows for efficient irrigation, easier planting, and even distribution of water and nutrients. Flat land is less prone to erosion and provides more predictable growing conditions.'),
     ('loamyModal', 'Loamy Soil', 'Loamy soil is considered the best for farming due to its balanced texture. It retains moisture without becoming waterlogged, allows roots to grow freely, and is rich in nutrients. Loam also has excellent aeration, which promotes healthy plant growth.')
 ] %}
-
+<!-- Modal template for each type of suitable land -->
 <div class="modal fade" id="{{ modal_id }}" tabindex="-1" role="dialog" aria-labelledby="{{ modal_id }}Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -67,14 +69,14 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        {{ modal_content }}
+        {{ modal_content }} <!-- Content for the modal (description of the land type) -->
       </div>
     </div>
   </div>
 </div>
 {% endfor %}
 
-<!-- Modals for Not-Suitable Land (same as before) -->
+<!-- Modals for Not-Suitable Land (same as above, but with content for not-suitable land types) -->
 {% for modal_id, modal_title, modal_content in [
     ('rockyModal', 'Rocky Land', 'Rocky land is unsuitable for farming due to the presence of large rocks that hinder plowing and plant growth. These rocks make it difficult to work the land and impede root development. Additionally, rocky land often has poor soil depth and is prone to erosion.'),
     ('waterloggedModal', 'Waterlogged Land', 'Waterlogged land has poor drainage and retains excessive water, making it difficult for plants to grow. The excessive moisture leads to root rot, nutrient deficiencies, and an increased risk of fungal diseases. This type of land is unsuitable for most agricultural crops.'),
@@ -82,6 +84,7 @@
     ('sandyModal', 'Sandy Soil', 'Sandy soil has large particles that allow water to drain too quickly, making it difficult for plants to absorb enough water and nutrients. This type of soil often lacks the necessary organic matter and nutrients for healthy plant growth. It also requires frequent irrigation and fertilization.'),
     ('acidicModal', 'Acidic Soil', 'Acidic soil has a low pH, which can affect the availability of essential nutrients for plants. Crops generally prefer neutral to slightly acidic soils, so highly acidic soil can lead to nutrient deficiencies, stunted growth, and poor crop yields.')
 ] %}
+<!-- Modal template for each type of not-suitable land -->
 <div class="modal fade" id="{{ modal_id }}" tabindex="-1" role="dialog" aria-labelledby="{{ modal_id }}Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -90,21 +93,21 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        {{ modal_content }}
+        {{ modal_content }} <!-- Content for the modal (description of the not-suitable land type) -->
       </div>
     </div>
   </div>
 </div>
 {% endfor %}
 
-<!-- Inline CSS -->
+<!-- Inline CSS for styling the page elements -->
 <style>
     .soil-insights-box {
         border: 3px solid transparent;
         padding: 20px;
         margin: 30px 0;
         text-align: center;
-        background-color: rgba(255, 255, 255, 0.3);
+        background-color: rgba(245, 237, 237, 0.3);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
 
@@ -167,7 +170,7 @@
 
     .explanation-box h3 {
         font-size: 1.75rem;
-        color: black;
+        color: white; /* Change color to white */
         font-weight: 700;
         margin: 0;
     }

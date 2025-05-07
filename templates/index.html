@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Google Fonts -->
+<!-- Google Fonts for Poppins font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
+    /* Global Body Styling */
     body {
         font-family: 'Poppins', sans-serif;
         margin: 0;
@@ -14,99 +16,179 @@
         background-position: center;
         background-attachment: fixed;
         background-size: cover;
+        overflow-x: hidden;
     }
 
+    /* Hero Section with Goals */
     .hero-bg {
         height: 90vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+        flex-direction: column;
+        text-align: center;
     }
 
     .overlay-text {
-        text-align: center;
-    }
-
-    .overlay-text h1,
-    .overlay-text p {
         color: white;
-        text-shadow:
-            -1px -1px 0 #000,
-             1px -1px 0 #000,
-            -1px  1px 0 #000,
-             1px  1px 0 #000;
     }
 
-    /* Box for Goals */
-    .goal-box {
-        display: inline-block;
-        background-color: rgba(0, 0, 0, 0.6);
-        color: #f5f5f5;
-        padding: 1rem 2rem;
-        font-size: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        text-align: center;
+    .overlay-text h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .overlay-text p {
+        font-size: 1.25rem;
+        font-weight: 400;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         margin-bottom: 2rem;
+    }
+
+    /* Goals Box inside Hero Section */
+    .goal-box-container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
         width: 100%;
     }
 
-    .goal-box h5 {
+    .goal-box {
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #f5f5f5;
+        padding: 2rem 2.5rem;
         font-size: 1.25rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        width: 30%;
+    }
+
+    .goal-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .goal-box h5 {
+        font-size: 1.5rem;
         margin-top: 1rem;
         color: #f5f5f5;
     }
 
     .goal-box p {
-        font-size: 1rem;
+        font-size: 1.1rem;
         color: #e0e0e0;
     }
 
-    .goal-header {
-        color: white;
-        font-size: 2.5rem;
-        font-weight: 600;
+    /* Video Section */
+    .video-section {
+        position: relative;
+        margin: 2rem 0;
+    }
+
+    .video-text {
         text-align: center;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        margin-bottom: 1rem;
+        color: white; /* Changed font color to white */
+    }
+
+    .video-text h3 {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .video-text p {
+        font-size: 1.2rem;
+        color: white; /* Changed font color to white */
+    }
+
+    /* Video Styling */
+    .video-section video {
+        width: 100%;
+        height: auto;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Overlay Text for Video */
+    .video-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 1.75rem;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        text-align: center;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .goal-box {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .goal-header {
+            font-size: 2rem;
+        }
+
+        .overlay-text h1 {
+            font-size: 2.5rem;
+        }
     }
 </style>
 
 <!-- HERO SECTION -->
 <section class="hero-bg">
     <div class="container overlay-text">
-        <h1 class="display-4 fw-bold">Welcome to GAMBIT</h1>
-        <p class="lead">Geographic Analysis And Mapping of Barangay Irrigated Territories</p>
+        <!-- Hero Title and Description -->
+        <h1>Welcome to GAMBIT</h1>
+        <p>Geographic Analysis And Mapping of Barangay Irrigated Territories</p>
+
+        <!-- GOALS SECTION INSIDE HERO -->
+        <div class="goal-box-container">
+            <!-- Goal Box 1: Land Mapping -->
+            <div class="goal-box">
+                <div style="font-size: 2.5rem;">🗺️</div>
+                <h5>Land Mapping</h5>
+                <p>Utilize geographic data to identify suitable agricultural land and improve farming efficiency.</p>
+            </div>
+            <!-- Goal Box 2: Soil Science -->
+            <div class="goal-box">
+                <div style="font-size: 2.5rem;">🧪</div>
+                <h5>Soil Science</h5>
+                <p>Analyze soil composition and quality to enhance agricultural productivity.</p>
+            </div>
+            <!-- Goal Box 3: Farmer Support -->
+            <div class="goal-box">
+                <div style="font-size: 2.5rem;">👨‍🌾</div>
+                <h5>Farmer Support</h5>
+                <p>Equip farmers with resources, knowledge, and tools for sustainable farming practices.</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- GOALS SECTION -->
-<section class="py-5 section-dark">
+<!-- VIDEO SECTION -->
+<section class="video-section">
     <div class="container">
-        <h2 class="goal-header mb-5">GOALS</h2>
-
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="goal-box">
-                    <div style="font-size: 2rem;">🗺️</div>
-                    <h5 class="mt-3">Land Mapping</h5>
-                    <p>Use geographic data to identify usable agricultural land and boost farming efficiency.</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="goal-box">
-                    <div style="font-size: 2rem;">🧪</div>
-                    <h5 class="mt-3">Soil Science</h5>
-                    <p>Analyze and improve soil quality to increase productivity and sustainability.</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="goal-box">
-                    <div style="font-size: 2rem;">👨‍🌾</div>
-                    <h5 class="mt-3">Farmer Support</h5>
-                    <p>Provide farmers with tools, information, and resources to succeed.</p>
-                </div>
-            </div>
+        <!-- Video Heading and Description -->
+        <div class="video-text">
+            <h3>Watch Our Survey Video</h3>
+            <p>Learn more about our ongoing surveys and research on agricultural lands.</p>
         </div>
+        
+        <!-- Embed Local Video with Autoplay -->
+        <video controls autoplay muted>
+            <source src="{{ url_for('static', filename='videos/video.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 </section>
 

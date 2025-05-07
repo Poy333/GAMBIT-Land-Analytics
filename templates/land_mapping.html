@@ -2,94 +2,137 @@
 
 {% block content %}
 <div class="container">
+    <!-- Temporary Survey Message -->
+    <div class="alert alert-info text-center mb-4">
+        <strong>Notice:</strong> This survey is temporary and only includes select mountain barangays. Due to logistical limitations, we are unable to survey all barangays at this time.
+    </div>
+
+    <!-- Page Title and Description -->
     <h1 class="text-center mb-4 text-white">Land Mapping for Mountain Barangays</h1>
     <p class="text-center text-white">This page shows the classification of land as suitable or not suitable for farming, per sitio in each barangay. We are conducting a survey for the following barangays: Babag, Bon-bon, Buot, Sudlon 1, and Malubog. Each barangay has 5 sitios.</p>
 
     <div id="barangays-container">
-        {% set barangays = [
-            {"name": "Babag", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]},
-            {"name": "Bon-bon", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]},
-            {"name": "Buot", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]},
-            {"name": "Sudlon 1", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]},
-            {"name": "Malubog", "sitios": ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"]}
-        ] %}
-
-        {% for barangay in barangays %}
-            <div class="barangay-box mb-4" style="cursor: pointer; border: 1px solid #ccc; padding: 10px; border-radius: 5px;" onclick="toggleSitios('{{ barangay.name }}')">
-                <h3 class="text-white">{{ barangay.name }}</h3>
-            </div>
-            
-            <!-- Sitios for Barangay -->
-            <div class="sitios-container" id="sitios-{{ barangay.name }}" style="display: none;">
-                {% for sitio in barangay.sitios %}
-                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #f0f0f0; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', '{{ barangay.name }}')">
-                        <h4 class="text-white">{{ sitio }}</h4>
+        <!-- Barangay 1: Babag -->
+        <div class="barangay-section mb-5">
+            <h3 class="text-white">Babag</h3>
+            <div class="sitios-container">
+                <!-- Loop through sitios in Babag barangay -->
+                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
+                    <!-- Each sitio is clickable and triggers the 'showSuitableOptions' function -->
+                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #4CAF50; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Babag')">
+                        <h4>{{ sitio }}</h4>
                     </div>
                 {% endfor %}
             </div>
-        {% endfor %}
+        </div>
+
+        <!-- Barangay 2: Bon-bon -->
+        <div class="barangay-section mb-5">
+            <h3 class="text-white">Bon-bon</h3>
+            <div class="sitios-container">
+                <!-- Loop through sitios in Bon-bon barangay -->
+                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
+                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #FF9800; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Bon-bon')">
+                        <h4>{{ sitio }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Barangay 3: Buot -->
+        <div class="barangay-section mb-5">
+            <h3 class="text-white">Buot</h3>
+            <div class="sitios-container">
+                <!-- Loop through sitios in Buot barangay -->
+                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
+                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #2196F3; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Buot')">
+                        <h4>{{ sitio }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Barangay 4: Sudlon 1 -->
+        <div class="barangay-section mb-5">
+            <h3 class="text-white">Sudlon 1</h3>
+            <div class="sitios-container">
+                <!-- Loop through sitios in Sudlon 1 barangay -->
+                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
+                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #673AB7; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Sudlon 1')">
+                        <h4>{{ sitio }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Barangay 5: Malubog -->
+        <div class="barangay-section mb-5">
+            <h3 class="text-white">Malubog</h3>
+            <div class="sitios-container">
+                <!-- Loop through sitios in Malubog barangay -->
+                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
+                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #FF5722; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Malubog')">
+                        <h4>{{ sitio }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
     <!-- Suitable and Not Suitable Land Images -->
     <div id="suitable-options" style="display: none;">
+        <!-- Section for Suitable Land Images -->
         <div id="suitable-images" style="display: none;">
             <h5 class="text-white">✅ Suitable Land</h5>
-            <div id="suitable-images-container"></div>
+            <div id="suitable-images-container"></div> <!-- Container to display suitable images -->
         </div>
 
+        <!-- Section for Not Suitable Land Images -->
         <div id="not-suitable-images" style="display: none;">
             <h5 class="text-white">❌ Not Suitable Land</h5>
-            <div id="not-suitable-images-container"></div>
+            <div id="not-suitable-images-container"></div> <!-- Container to display not suitable images -->
         </div>
+    </div>
+
+    <!-- Stay Tuned Message -->
+    <div class="alert alert-info text-center mt-4">
+        <strong>Stay tuned!</strong> More updates and surveys will be available soon.
     </div>
 </div>
 
 <script>
-    // Function to show or hide the sitios based on barangay click
-    function toggleSitios(barangayName) {
-        const sitiosContainer = document.getElementById('sitios-' + barangayName);
-        sitiosContainer.style.display = (sitiosContainer.style.display === 'none') ? 'block' : 'none';
-    }
-
     // Function to display suitable/not suitable images based on selected sitio
     function showSuitableOptions(sitioName, barangayName) {
-        // For now, let's simulate fetching suitable and not suitable images.
-        // You can update this logic to fetch real data based on the sitio
+        // Simulate fetching suitable and not suitable images for each sitio
         const suitableImages = ["image1.jpg", "image2.jpg"]; // Replace with actual image filenames
         const notSuitableImages = ["image3.jpg", "image4.jpg"]; // Replace with actual image filenames
 
-        // Ask the user whether they want to see suitable or not suitable images
-        const isSuitable = confirm('Do you want to see Suitable land images for ' + sitioName + ' in ' + barangayName + '?');
-
-        // Clear previous images
+        // Clear previous images (if any)
         document.getElementById('suitable-images-container').innerHTML = '';
         document.getElementById('not-suitable-images-container').innerHTML = '';
 
-        // Show suitable images if the user selects "Yes"
-        if (isSuitable && suitableImages.length > 0) {
+        // Show suitable images if available
+        if (suitableImages.length > 0) {
             document.getElementById('suitable-images').style.display = 'block';
             suitableImages.forEach(function(img) {
                 const imgElement = document.createElement('img');
                 imgElement.src = "{{ url_for('static', filename='') }}" + img; // Construct image URL
-                imgElement.classList.add('img-fluid', 'mb-2');
+                imgElement.classList.add('img-fluid', 'mb-2'); // Add Bootstrap classes for responsive image
                 document.getElementById('suitable-images-container').appendChild(imgElement);
             });
-        } else {
-            document.getElementById('suitable-images').style.display = 'none';
         }
 
-        // Show not suitable images if the user selects "No"
-        if (!isSuitable && notSuitableImages.length > 0) {
+        // Show not suitable images if available
+        if (notSuitableImages.length > 0) {
             document.getElementById('not-suitable-images').style.display = 'block';
             notSuitableImages.forEach(function(img) {
                 const imgElement = document.createElement('img');
                 imgElement.src = "{{ url_for('static', filename='') }}" + img; // Construct image URL
-                imgElement.classList.add('img-fluid', 'mb-2');
+                imgElement.classList.add('img-fluid', 'mb-2'); // Add Bootstrap classes for responsive image
                 document.getElementById('not-suitable-images-container').appendChild(imgElement);
             });
-        } else {
-            document.getElementById('not-suitable-images').style.display = 'none';
         }
     }
 </script>
+
 {% endblock %}
