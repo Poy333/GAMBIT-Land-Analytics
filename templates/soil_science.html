@@ -49,58 +49,57 @@
             </div>
         </div>
     </div>
-
 </div>
 
-<!-- Modal definitions for each type of suitable land (using dynamic loops for less code duplication) -->
-{% for modal_id, modal_title, modal_content in [
-    ('arableModal', 'Arable Land', 'Arable land is suitable for farming as it is well-drained, has a deep soil profile, and supports plant growth with sufficient nutrients. It is often flat and free of obstructions, making it ideal for cultivation.'),
-    ('drainedModal', 'Well-Drained Land', 'Well-drained land has good water movement, preventing waterlogging that could harm plant roots. This type of land is essential for most crops, providing ideal conditions for root growth and nutrient absorption.'),
-    ('fertileModal', 'Fertile Land', 'Fertile land is rich in nutrients, including nitrogen, phosphorus, and potassium. It supports the growth of crops by offering essential elements required for plant development. Fertile land often has a balance of organic matter, minerals, and microbial activity.'),
-    ('flatModal', 'Flat Land', 'Flat land is ideal for farming because it allows for efficient irrigation, easier planting, and even distribution of water and nutrients. Flat land is less prone to erosion and provides more predictable growing conditions.'),
-    ('loamyModal', 'Loamy Soil', 'Loamy soil is considered the best for farming due to its balanced texture. It retains moisture without becoming waterlogged, allows roots to grow freely, and is rich in nutrients. Loam also has excellent aeration, which promotes healthy plant growth.')
+<!-- Modal definitions for Suitable Land -->
+{% for modal_id, modal_title, modal_content, modal_image in [
+    ('arableModal', 'Arable Land', 'Arable land is suitable for farming as it is well-drained, has a deep soil profile, and supports plant growth with sufficient nutrients. It is often flat and free of obstructions, making it ideal for cultivation.', 'arable_land.jpg'),
+    ('drainedModal', 'Well-Drained Land', 'Well-drained land has good water movement, preventing waterlogging that could harm plant roots. This type of land is essential for most crops, providing ideal conditions for root growth and nutrient absorption.', 'well_drained_land.jpg'),
+    ('fertileModal', 'Fertile Land', 'Fertile land is rich in nutrients, including nitrogen, phosphorus, and potassium. It supports the growth of crops by offering essential elements required for plant development. Fertile land often has a balance of organic matter, minerals, and microbial activity.', 'fertile_land.jpg'),
+    ('flatModal', 'Flat Land', 'Flat land is ideal for farming because it allows for efficient irrigation, easier planting, and even distribution of water and nutrients. Flat land is less prone to erosion and provides more predictable growing conditions.', 'flat_land.jpg'),
+    ('loamyModal', 'Loamy Soil', 'Loamy soil is considered the best for farming due to its balanced texture. It retains moisture without becoming waterlogged, allows roots to grow freely, and is rich in nutrients. Loam also has excellent aeration, which promotes healthy plant growth.', 'loamy_soil_land.jpg')
 ] %}
-<!-- Modal template for each type of suitable land -->
 <div class="modal fade" id="{{ modal_id }}" tabindex="-1" role="dialog" aria-labelledby="{{ modal_id }}Label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="{{ modal_id }}Label">{{ modal_title }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        {{ modal_content }} <!-- Content for the modal (description of the land type) -->
+        <img src="{{ url_for('static', filename='images/' ~ modal_image) }}" alt="{{ modal_title }}" class="img-fluid mb-3" />
+        <p>{{ modal_content }}</p>
       </div>
     </div>
   </div>
 </div>
 {% endfor %}
 
-<!-- Modals for Not-Suitable Land (same as above, but with content for not-suitable land types) -->
-{% for modal_id, modal_title, modal_content in [
-    ('rockyModal', 'Rocky Land', 'Rocky land is unsuitable for farming due to the presence of large rocks that hinder plowing and plant growth. These rocks make it difficult to work the land and impede root development. Additionally, rocky land often has poor soil depth and is prone to erosion.'),
-    ('waterloggedModal', 'Waterlogged Land', 'Waterlogged land has poor drainage and retains excessive water, making it difficult for plants to grow. The excessive moisture leads to root rot, nutrient deficiencies, and an increased risk of fungal diseases. This type of land is unsuitable for most agricultural crops.'),
-    ('steepModal', 'Steep Land', 'Steep land is prone to erosion and runoff, making it difficult to manage for farming. Crops on steep slopes are often exposed to excessive water runoff, which washes away topsoil and reduces soil fertility. Such land is challenging for cultivation and requires special techniques to prevent erosion.'),
-    ('sandyModal', 'Sandy Soil', 'Sandy soil has large particles that allow water to drain too quickly, making it difficult for plants to absorb enough water and nutrients. This type of soil often lacks the necessary organic matter and nutrients for healthy plant growth. It also requires frequent irrigation and fertilization.'),
-    ('acidicModal', 'Acidic Soil', 'Acidic soil has a low pH, which can affect the availability of essential nutrients for plants. Crops generally prefer neutral to slightly acidic soils, so highly acidic soil can lead to nutrient deficiencies, stunted growth, and poor crop yields.')
+<!-- Modal definitions for Not-Suitable Land -->
+{% for modal_id, modal_title, modal_content, modal_image in [
+    ('rockyModal', 'Rocky Land', 'Rocky land is unsuitable for farming due to the presence of large rocks that hinder plowing and plant growth. These rocks make it difficult to work the land and impede root development. Additionally, rocky land often has poor soil depth and is prone to erosion.', 'rocky_land.jpg'),
+    ('waterloggedModal', 'Waterlogged Land', 'Waterlogged land has poor drainage and retains excessive water, making it difficult for plants to grow. The excessive moisture leads to root rot, nutrient deficiencies, and an increased risk of fungal diseases. This type of land is unsuitable for most agricultural crops.', 'water_logged_land.jpg'),
+    ('steepModal', 'Steep Land', 'Steep land is prone to erosion and runoff, making it difficult to manage for farming. Crops on steep slopes are often exposed to excessive water runoff, which washes away topsoil and reduces soil fertility. Such land is challenging for cultivation and requires special techniques to prevent erosion.', 'steep_land.jpg'),
+    ('sandyModal', 'Sandy Soil', 'Sandy soil has large particles that allow water to drain too quickly, making it difficult for plants to absorb enough water and nutrients. This type of soil often lacks the necessary organic matter and nutrients for healthy plant growth. It also requires frequent irrigation and fertilization.', 'barren_land.jpg'),
+    ('acidicModal', 'Acidic Soil', 'Acidic soil has a low pH, which can affect the availability of essential nutrients for plants. Crops generally prefer neutral to slightly acidic soils, so highly acidic soil can lead to nutrient deficiencies, stunted growth, and poor crop yields.', 'eroded_land.jpg')
 ] %}
-<!-- Modal template for each type of not-suitable land -->
 <div class="modal fade" id="{{ modal_id }}" tabindex="-1" role="dialog" aria-labelledby="{{ modal_id }}Label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="{{ modal_id }}Label">{{ modal_title }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        {{ modal_content }} <!-- Content for the modal (description of the not-suitable land type) -->
+        <img src="{{ url_for('static', filename='images/' ~ modal_image) }}" alt="{{ modal_title }}" class="img-fluid mb-3" />
+        <p>{{ modal_content }}</p>
       </div>
     </div>
   </div>
 </div>
 {% endfor %}
 
-<!-- Inline CSS for styling the page elements -->
+<!-- Inline CSS -->
 <style>
     .soil-insights-box {
         border: 3px solid transparent;
@@ -113,66 +112,117 @@
 
     .soil-insights-box h2 {
         color: black;
-        font-size: 2rem;
+        font-size: 2.1rem;
         font-weight: 700;
-        letter-spacing: 1px;
         text-transform: uppercase;
-        margin: 0;
+        letter-spacing: 3px;
     }
 
     .land-box {
-        border: 3px solid transparent;
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        height: 100%;
+        border: 3px solid;
+        border-radius: 10px;
+        padding: 25px 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        min-height: 350px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
     }
 
-    .land-box h3 {
-        color: black;
-        font-weight: 700;
-        font-size: 1.5rem;
-        text-transform: uppercase;
-        margin: 0;
+    /* Suitable land styles */
+    .land-box.suitable {
+        border-color: #1e7e34; /* dark green */
+        background-color: rgba(30, 126, 52, 0.1);
     }
 
-    .suitable-buttons .btn,
-    .not-suitable-buttons .btn {
-        font-weight: bold;
-        border-radius: 12px;
-        padding: 10px 20px;
-        background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
+    .land-box.suitable h3 {
         color: white;
+        font-weight: 700;
+        font-size: 1.7rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* Not suitable land styles */
+    .land-box.not-suitable {
+        border-color: #c82333; /* dark red */
+        background-color: rgba(200, 35, 51, 0.1);
+    }
+
+    .land-box.not-suitable h3 {
+        color: white;
+        font-weight: 700;
+        font-size: 1.7rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .btn {
+        background-color: #f0f0f0;
         border: none;
+        font-weight: 600;
+        color: #333;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        transition: background-color 0.3s ease, color 0.3s ease;
+        cursor: pointer;
     }
 
-    .suitable-buttons .btn:hover,
-    .not-suitable-buttons .btn:hover {
-        background-color: rgba(0, 0, 0, 0.8); /* darker on hover */
+    .btn:hover,
+    .btn:focus {
+        background-color: #007bff;
+        color: white;
+        outline: none;
     }
 
-    .not-suitable-buttons .btn {
-        background-color: rgba(255, 0, 0, 0.6); /* semi-transparent red for not-suitable land */
+    /* Danger buttons for not suitable land */
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
     }
 
-    .not-suitable-buttons .btn:hover {
-        background-color: rgba(255, 0, 0, 0.8); /* darker on hover */
+    .btn-danger:hover,
+    .btn-danger:focus {
+        background-color: #a71d2a;
+        color: white;
+        outline: none;
     }
 
     .explanation-box {
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0.3);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        margin-top: 30px;
+        background-color: #ffffffdd;
+        border-radius: 10px;
+        padding: 25px 20px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
 
     .explanation-box h3 {
-        font-size: 1.75rem;
-        color: white; /* Change color to white */
+        color: #222;
         font-weight: 700;
-        margin: 0;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        letter-spacing: 1.2px;
+    }
+
+    .explanation-box p {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        letter-spacing: 0.5px;
+    }
+
+    /* Fade in effect */
+    .fade-in {
+        animation: fadeInAnimation ease 2s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeInAnimation {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 </style>
 {% endblock %}

@@ -26,78 +26,82 @@ def soil_science():
 def land_mapping():
     barangays = [
         {
-            'name': 'Babag',
+            'name': 'SUITABLE LAND OF BABAG',
             'sitios': [
                 {
-                    'name': 'Sitio 1',
-                    'suitable': ['images/land_mapping/babag/sitio1/suitable1.jpg'],
-                    'not_suitable': ['images/land_mapping/babag/sitio1/not_suitable1.jpg']
+                    'name': 'Tugop Babag (Sitio 1)',
+                    'coordinates': [(10.377220183717416, 123.85310421872815)],
                 },
                 {
-                    'name': 'Sitio 2',
-                    'suitable': ['images/land_mapping/babag/sitio2/suitable1.jpg'],
-                    'not_suitable': ['images/land_mapping/babag/sitio2/not_suitable1.jpg']
+                    'name': 'Babag-1 (Sitio 2)',
+                    'coordinates': [(10.365779502155927, 123.85695228449356)],
                 },
                 {
-                    'name': 'Sitio 3',
-                    'suitable': [],
-                    'not_suitable': []
-                },
-                {
-                    'name': 'Sitio 4',
-                    'suitable': [],
-                    'not_suitable': []
-                },
-                {
-                    'name': 'Sitio 5',
-                    'suitable': [],
-                    'not_suitable': []
+                    'name': 'Hamtik (Sitio 3)',
+                    'coordinates': [(10.369436359861302, 123.8479318797376)],
                 }
             ]
         },
-        {
-            'name': 'Bon-bon',
-            'sitios': [
-                {'name': 'Sitio 1', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 2', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 3', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 4', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 5', 'suitable': [], 'not_suitable': []}
-            ]
-        },
-        {
-            'name': 'Buot',
-            'sitios': [
-                {'name': 'Sitio 1', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 2', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 3', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 4', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 5', 'suitable': [], 'not_suitable': []}
-            ]
-        },
-        {
-            'name': 'Sudlon 1',
-            'sitios': [
-                {'name': 'Sitio 1', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 2', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 3', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 4', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 5', 'suitable': [], 'not_suitable': []}
-            ]
-        },
-        {
-            'name': 'Malubog',
-            'sitios': [
-                {'name': 'Sitio 1', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 2', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 3', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 4', 'suitable': [], 'not_suitable': []},
-                {'name': 'Sitio 5', 'suitable': [], 'not_suitable': []}
+                        {
+                            'name': 'SUITABLE LAND OF MALUBOG ',
+                            'sitios': [
+                                {
+                    'name': 'Kang-Irag Sitio 1',
+                    'coordinates': [
+                        (10.398138501838254, 123.863607164473),
+                        (10.397830847005448, 123.864125294955)  # Existing second coordinate
+                    ],
+                },
+                {
+                    'name': 'Tops Sitio 2',
+                    'coordinates': [
+                        (10.374431138925361, 123.8706553193261),
+                        (10.377305963328025, 123.87193309357745)  # Existing second coordinate
+                    ],
+                },
+               {
+                    'name': 'Pung-ol Sitio 3',
+                    'coordinates': [
+                        (10.386370807140914, 123.87023625997749)
+                    ],
+                }
             ]
         }
     ]
-    return render_template('land_mapping.html', barangays=barangays)
 
+    def calculate_bbox_and_center(coords):
+        lats = [c[0] for c in coords]
+        lngs = [c[1] for c in coords]
+        min_lat, max_lat = min(lats), max(lats)
+        min_lng, max_lng = min(lngs), max(lngs)
+        center_lat = (min_lat + max_lat) / 2
+        center_lng = (min_lng + max_lng) / 2
+        bbox = [min_lng, min_lat, max_lng, max_lat]
+        center = (center_lat, center_lng)
+        return bbox, center
+
+    for barangay in barangays:
+        for sitio in barangay['sitios']:
+            coords = sitio.get('coordinates')
+            if coords:
+                bbox, center = calculate_bbox_and_center(coords)
+                sitio['bbox'] = bbox
+                sitio['center'] = center
+                sitio['latitude'], sitio['longitude'] = center
+
+    map_sitios = []
+    for barangay in barangays:
+        for sitio in barangay['sitios']:
+            lat = sitio.get('latitude')
+            lng = sitio.get('longitude')
+            if lat is not None and lng is not None:
+                map_sitios.append({
+                    'name': f"{barangay['name']} - {sitio['name']}",
+                    'lat': lat,
+                    'lng': lng
+                })
+
+    return render_template('land_mapping.html', barangays=barangays, map_sitios=map_sitios)
 
 
 if __name__ == '__main__':

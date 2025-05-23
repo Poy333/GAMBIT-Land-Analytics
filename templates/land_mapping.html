@@ -1,138 +1,139 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <!-- Temporary Survey Message -->
-    <div class="alert alert-info text-center mb-4">
-        <strong>Notice:</strong> This survey is temporary and only includes select mountain barangays. Due to logistical limitations, we are unable to survey all barangays at this time.
+<div class="container mt-4">
+  <!-- Logo and Heading in a transparent box -->
+  <div class="heading-container doodle-font">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-img me-2" />
+    <h1 class="heading-text">LAND MAPPING FOR MOUNTAIN BARANGAYS</h1>
+  </div>
+
+  <div id="barangays-container" class="mt-4">
+    {% for barangay in barangays %}
+    <div class="barangay-section mb-5">
+      <h3 class="text-white">{{ barangay.name }}</h3>
+
+      <!-- Single box containing all sitios horizontally -->
+      <div
+        class="map-link p-3"
+        style="background-color: rgba(0, 0, 0, 0.5); color: #fff; border-radius: 8px;"
+      >
+        <div class="sitios-container">
+          {% for sitio in barangay.sitios %}
+            {% if sitio.latitude is not none and sitio.longitude is not none %}
+            <div class="sitio-item me-4">
+              <span style="font-size: 1.1rem;">📍 {{ sitio.name }}</span><br />
+              <a
+                id="map-link-{{ sitio.name | replace(' ', '-') | lower }}"
+                href="https://www.google.com/maps/place/{{ sitio.latitude }},{{ sitio.longitude }}/@{{ sitio.latitude }},{{ sitio.longitude }},15z"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline-light btn-sm mt-1"
+              >
+                View on Google Maps
+              </a>
+            </div>
+            {% else %}
+            <div class="sitio-item me-4">
+              <span style="font-size: 1.1rem;">📍 {{ sitio.name }}</span><br />
+              <span>No map data available.</span>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
     </div>
+    {% endfor %}
+  </div>
 
-    <!-- Page Title and Description -->
-    <h1 class="text-center mb-4 text-white">Land Mapping for Mountain Barangays</h1>
-    <p class="text-center text-white">This page shows the classification of land as suitable or not suitable for farming, per sitio in each barangay. We are conducting a survey for the following barangays: Babag, Bon-bon, Buot, Sudlon 1, and Malubog. Each barangay has 5 sitios.</p>
-
-    <div id="barangays-container">
-        <!-- Barangay 1: Babag -->
-        <div class="barangay-section mb-5">
-            <h3 class="text-white">Babag</h3>
-            <div class="sitios-container">
-                <!-- Loop through sitios in Babag barangay -->
-                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
-                    <!-- Each sitio is clickable and triggers the 'showSuitableOptions' function -->
-                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #4CAF50; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Babag')">
-                        <h4>{{ sitio }}</h4>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Barangay 2: Bon-bon -->
-        <div class="barangay-section mb-5">
-            <h3 class="text-white">Bon-bon</h3>
-            <div class="sitios-container">
-                <!-- Loop through sitios in Bon-bon barangay -->
-                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
-                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #FF9800; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Bon-bon')">
-                        <h4>{{ sitio }}</h4>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Barangay 3: Buot -->
-        <div class="barangay-section mb-5">
-            <h3 class="text-white">Buot</h3>
-            <div class="sitios-container">
-                <!-- Loop through sitios in Buot barangay -->
-                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
-                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #2196F3; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Buot')">
-                        <h4>{{ sitio }}</h4>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Barangay 4: Sudlon 1 -->
-        <div class="barangay-section mb-5">
-            <h3 class="text-white">Sudlon 1</h3>
-            <div class="sitios-container">
-                <!-- Loop through sitios in Sudlon 1 barangay -->
-                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
-                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #673AB7; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Sudlon 1')">
-                        <h4>{{ sitio }}</h4>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Barangay 5: Malubog -->
-        <div class="barangay-section mb-5">
-            <h3 class="text-white">Malubog</h3>
-            <div class="sitios-container">
-                <!-- Loop through sitios in Malubog barangay -->
-                {% for sitio in ["Sitio 1", "Sitio 2", "Sitio 3"] %}
-                    <div class="sitio-box mb-3" style="cursor: pointer; padding: 10px; background-color: #FF5722; color: #fff; border-radius: 5px;" onclick="showSuitableOptions('{{ sitio }}', 'Malubog')">
-                        <h4>{{ sitio }}</h4>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-
-    <!-- Suitable and Not Suitable Land Images -->
-    <div id="suitable-options" style="display: none;">
-        <!-- Section for Suitable Land Images -->
-        <div id="suitable-images" style="display: none;">
-            <h5 class="text-white">✅ Suitable Land</h5>
-            <div id="suitable-images-container"></div> <!-- Container to display suitable images -->
-        </div>
-
-        <!-- Section for Not Suitable Land Images -->
-        <div id="not-suitable-images" style="display: none;">
-            <h5 class="text-white">❌ Not Suitable Land</h5>
-            <div id="not-suitable-images-container"></div> <!-- Container to display not suitable images -->
-        </div>
-    </div>
-
-    <!-- Stay Tuned Message -->
-    <div class="alert alert-info text-center mt-4">
-        <strong>Stay tuned!</strong> More updates and surveys will be available soon.
-    </div>
+  <div class="alert alert-info text-center mt-4">
+    <strong>Stay tuned!</strong> More updates and surveys will be available soon.
+  </div>
 </div>
 
-<script>
-    // Function to display suitable/not suitable images based on selected sitio
-    function showSuitableOptions(sitioName, barangayName) {
-        // Simulate fetching suitable and not suitable images for each sitio
-        const suitableImages = ["image1.jpg", "image2.jpg"]; // Replace with actual image filenames
-        const notSuitableImages = ["image3.jpg", "image4.jpg"]; // Replace with actual image filenames
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
 
-        // Clear previous images (if any)
-        document.getElementById('suitable-images-container').innerHTML = '';
-        document.getElementById('not-suitable-images-container').innerHTML = '';
+  .doodle-font {
+    font-family: 'Comic Neue', cursive;
+  }
 
-        // Show suitable images if available
-        if (suitableImages.length > 0) {
-            document.getElementById('suitable-images').style.display = 'block';
-            suitableImages.forEach(function(img) {
-                const imgElement = document.createElement('img');
-                imgElement.src = "{{ url_for('static', filename='') }}" + img; // Construct image URL
-                imgElement.classList.add('img-fluid', 'mb-2'); // Add Bootstrap classes for responsive image
-                document.getElementById('suitable-images-container').appendChild(imgElement);
-            });
-        }
+  .heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: fit-content;
+    margin: 0 auto; /* center the whole box */
+  }
 
-        // Show not suitable images if available
-        if (notSuitableImages.length > 0) {
-            document.getElementById('not-suitable-images').style.display = 'block';
-            notSuitableImages.forEach(function(img) {
-                const imgElement = document.createElement('img');
-                imgElement.src = "{{ url_for('static', filename='') }}" + img; // Construct image URL
-                imgElement.classList.add('img-fluid', 'mb-2'); // Add Bootstrap classes for responsive image
-                document.getElementById('not-suitable-images-container').appendChild(imgElement);
-            });
-        }
+  .logo-img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .heading-text {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* Sitios horizontal container inside single box */
+  .sitios-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* wrap if too many sitios */
+  }
+
+  .sitio-item {
+    min-width: 180px;
+  }
+
+  /* Responsive: stack vertically on small screens */
+  @media (max-width: 600px) {
+    .sitios-container {
+      flex-direction: column;
+      gap: 12px;
     }
-</script>
 
+    .sitio-item {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Mobile Google Maps geo: URI tweak
+  document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      document.querySelectorAll('a[id^="map-link-"]').forEach(link => {
+        const href = link.getAttribute('href');
+        try {
+          const url = new URL(href);
+          const coordsMatch = url.pathname.match(/\/@?(-?\d+\.\d+),(-?\d+\.\d+)/);
+          if (!coordsMatch) return;
+
+          const lat = coordsMatch[1];
+          const lng = coordsMatch[2];
+          const latlng = `${lat},${lng}`;
+          const sitioName = link.textContent.replace('View on Google Maps', '').trim();
+          const geoUri = `geo:${latlng}?q=${latlng}(${encodeURIComponent(sitioName)})`;
+          link.setAttribute('href', geoUri);
+        } catch (e) {
+          // Fail silently
+        }
+      });
+    }
+  });
+</script>
 {% endblock %}
